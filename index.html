@@ -5,32 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0A0B0D">
 <title>FORMA — Ton coach. Ton carnet. Ton journal.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 :root{
-  --bg:#0F1B2D; --card:#16283F; --card2:#1E3450; --line:#26405E;
-  --text:#EFF4FA; --muted:#8FA3BC; --accent:#F08A45; --accent-dim:rgba(240,138,69,.14);
-  --btn-txt:#24140A; --ok:#3CB371; --danger:#E05252; --amber:#FFB020; --blue:#7FA8D9; --purple:#B48BFF;
-  --r:16px; --nav-h:64px;
+  --bg:#070B12; --bg2:#0C121C; --card:#111926; --card2:#1A2331; --line:#232E3E;
+  --text:#F2F6FB; --muted:#8395AB; --accent:#FF6B2C; --accent2:#FFA83C;
+  --accent-dim:rgba(255,107,44,.13); --accent-line:rgba(255,107,44,.32);
+  --btn-txt:#1B0D03; --ok:#34D399; --danger:#F87171; --amber:#FBBF24; --blue:#60A5FA; --purple:#A78BFA;
+  --nav-bg:rgba(9,13,20,.86); --glass:rgba(255,255,255,.04);
+  --r:18px; --r-sm:13px; --nav-h:70px;
+  --sh-1:0 1px 2px rgba(0,0,0,.28);
+  --sh-2:0 6px 22px rgba(0,0,0,.34);
+  --sh-3:0 16px 44px rgba(0,0,0,.46);
 }
 #phone[data-theme="light"]{
-  --bg:#F7F9FB; --card:#FFFFFF; --card2:#EDF1F6; --line:#DFE6EE;
-  --text:#1A2433; --muted:#64748B; --accent:#D96A24; --accent-dim:rgba(217,106,36,.12);
-  --btn-txt:#FFFFFF; --blue:#1E3A5F; --purple:#7A5BC7;
+  --bg:#F4F6FA; --bg2:#FFFFFF; --card:#FFFFFF; --card2:#EDF1F7; --line:#E2E8F1;
+  --text:#0D1522; --muted:#64748B; --accent:#E85D1F; --accent2:#F59E0B;
+  --accent-dim:rgba(232,93,31,.10); --accent-line:rgba(232,93,31,.28);
+  --btn-txt:#FFFFFF; --ok:#059669; --danger:#DC2626; --amber:#D97706; --blue:#2563EB; --purple:#7C3AED;
+  --nav-bg:rgba(255,255,255,.88); --glass:rgba(13,21,34,.03);
+  --sh-1:0 1px 2px rgba(15,23,42,.05);
+  --sh-2:0 6px 20px rgba(15,23,42,.08);
+  --sh-3:0 16px 40px rgba(15,23,42,.12);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
-body{background:#000;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Inter',sans-serif;color:var(--text);display:flex;justify-content:center}
+body{background:#05070B;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:var(--text);display:flex;justify-content:center;-webkit-font-smoothing:antialiased}
 #phone{width:100%;max-width:430px;height:100dvh;background:var(--bg);position:relative;overflow:hidden;display:flex;flex-direction:column}
-@media(min-width:500px){#phone{height:min(880px,96dvh);margin:auto;border-radius:36px;border:1px solid #23262e;box-shadow:0 30px 80px rgba(0,0,0,.6)}}
+@media(min-width:500px){#phone{height:min(900px,96dvh);margin:auto;border-radius:42px;border:1px solid rgba(255,255,255,.07);box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 10px rgba(255,255,255,.02)}}
 .screen{position:absolute;inset:0;bottom:var(--nav-h);overflow-y:auto;overflow-x:hidden;display:none;padding:20px 18px 30px;scrollbar-width:none}
 .screen::-webkit-scrollbar{display:none}
 .screen.active{display:block;animation:fadeIn .22s ease}
 .screen.full{bottom:0}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-h1{font-size:24px;font-weight:800;letter-spacing:-.5px}
-h2{font-size:18px;font-weight:700;letter-spacing:-.3px}
+h1{font-family:'Outfit',sans-serif;font-size:26px;font-weight:800;letter-spacing:-.7px;line-height:1.15}
+h2{font-family:'Outfit',sans-serif;font-size:18.5px;font-weight:700;letter-spacing:-.35px}
 .sub{color:var(--muted);font-size:13.5px;line-height:1.5}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:14px}
 .row{display:flex;align-items:center;gap:12px}
@@ -172,10 +185,208 @@ label{font-size:12.5px;font-weight:600;color:var(--muted);display:block;margin:1
 .gps-actions{position:absolute;left:14px;right:14px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:1000;display:flex;gap:10px}
 .gps-actions .btn{box-shadow:0 8px 24px rgba(0,0,0,.35)}
 .kfig{font-size:13px;font-weight:700;color:var(--muted)}
+
+/* ============================================================
+   FORMA v2 — couche design premium + composants coach/client
+   ============================================================ */
+#phone{background:radial-gradient(1200px 520px at 50% -12%,var(--bg2),var(--bg)) fixed,var(--bg);color:var(--text)}
+.screen{padding:22px 18px 34px}
+.sub{font-size:13.5px;line-height:1.55}
+
+/* --- Cartes --- */
+.card{border-radius:var(--r);box-shadow:var(--sh-1);transition:border-color .2s,transform .15s}
+.card.tap:active{transform:scale(.99)}
+.card.hero{background:linear-gradient(150deg,rgba(255,107,44,.16),transparent 62%),var(--card);border-color:var(--accent-line);box-shadow:var(--sh-2)}
+.card.flat{background:transparent;border:none;box-shadow:none;padding:0}
+.section-t{font-family:'Outfit',sans-serif;font-size:12px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);margin:22px 2px 10px}
+.section-t:first-child{margin-top:4px}
+
+/* --- Boutons --- */
+.btn{border-radius:15px;font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:-.1px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 6px 18px rgba(255,107,44,.26);transition:transform .12s,box-shadow .2s,opacity .2s}
+.btn:active{transform:scale(.975);box-shadow:0 3px 10px rgba(255,107,44,.2)}
+.btn.ghost{background:var(--card2);box-shadow:none;border:1px solid var(--line);color:var(--text)}
+.btn.ghost:active{background:var(--line)}
+.btn.danger{background:rgba(248,113,113,.14);color:var(--danger);box-shadow:none;border:1px solid rgba(248,113,113,.28)}
+.btn.ok{background:linear-gradient(135deg,#34D399,#10B981);color:#04231A;box-shadow:0 6px 18px rgba(52,211,153,.22)}
+.btn.sm{border-radius:11px;padding:9px 15px}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.icon-btn{border-radius:13px;transition:background .2s,transform .12s}
+.icon-btn:active{transform:scale(.93)}
+
+/* --- Champs --- */
+input,select,textarea{border-radius:13px;transition:border-color .18s,box-shadow .18s;font-family:inherit}
+input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
+input::placeholder{color:var(--muted);opacity:.75}
+label{letter-spacing:.2px;text-transform:uppercase;font-size:11px;letter-spacing:.9px}
+
+/* --- Chips / tags --- */
+.chip{border-radius:13px;transition:all .15s}
+.chip.on{box-shadow:0 0 0 1px var(--accent) inset}
+.tag{letter-spacing:.4px;display:inline-flex;align-items:center;width:auto}
+
+/* --- Barres --- */
+.bar{height:9px;border-radius:8px}
+.bar>i{background:linear-gradient(90deg,var(--accent),var(--accent2))}
+
+/* --- Navigation --- */
+#nav{background:var(--nav-bg);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4)}
+.nav-it{position:relative;font-family:'Outfit',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.2px;gap:4px;transition:color .2s}
+.nav-it svg{transition:transform .2s}
+.nav-it.on svg{transform:translateY(-1px) scale(1.08)}
+.nav-it.on::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:26px;height:3px;border-radius:0 0 4px 4px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.nav-dot{position:absolute;top:9px;right:calc(50% - 20px);min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--danger);color:#fff;font-size:9.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+
+/* --- Toast --- */
+#toast{border-radius:15px;box-shadow:var(--sh-3);backdrop-filter:blur(10px)}
+
+/* --- Feuille modale --- */
+#sheet{border-radius:26px 26px 0 0;box-shadow:var(--sh-3)}
+
+/* ============ AUTH ============ */
+#scr-auth{padding:0;display:none;flex-direction:column;background:radial-gradient(760px 460px at 50% -6%,rgba(255,107,44,.16),transparent 70%)}
+#scr-auth.active{display:flex}
+.auth-wrap{flex:1;overflow-y:auto;display:flex;flex-direction:column;justify-content:center;padding:34px 24px calc(28px + env(safe-area-inset-bottom));scrollbar-width:none}
+.auth-wrap::-webkit-scrollbar{display:none}
+.auth-logo{font-family:'Outfit',sans-serif;font-size:40px;font-weight:900;letter-spacing:3px;text-align:center;line-height:1}
+.auth-logo span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.auth-tag{text-align:center;color:var(--muted);font-size:13.5px;margin:10px 0 26px;letter-spacing:.2px}
+.seg-auth{display:flex;background:var(--card2);border:1px solid var(--line);border-radius:15px;padding:4px;margin-bottom:20px}
+.seg-auth button{flex:1;padding:11px;border:none;border-radius:11px;background:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;transition:all .2s}
+.seg-auth button.on{background:var(--card);color:var(--text);box-shadow:var(--sh-1)}
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px}
+.role-card{background:var(--card2);border:1.5px solid var(--line);border-radius:15px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .18s}
+.role-card.on{border-color:var(--accent);background:var(--accent-dim)}
+.role-card .em{font-size:24px;display:block;margin-bottom:6px}
+.role-card .nm{font-family:'Outfit',sans-serif;font-weight:700;font-size:14px}
+.role-card .ds{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.35}
+.auth-alt{text-align:center;color:var(--muted);font-size:13px;margin-top:16px}
+.auth-alt b{color:var(--accent);cursor:pointer}
+
+/* ============ ÉCRAN VERROUILLÉ ============ */
+#scr-locked{padding:0;display:none;flex-direction:column}
+#scr-locked.active{display:flex}
+.lock-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:36px 26px}
+
+/* ============ COACH / MESSAGERIE ============ */
+#scr-coach{padding:0}
+.co-head{padding:18px 18px 14px;border-bottom:1px solid var(--line);flex-shrink:0;background:linear-gradient(180deg,var(--glass),transparent)}
+.co-body{flex:1;overflow-y:auto;padding:16px 18px 20px;scrollbar-width:none}
+.co-body::-webkit-scrollbar{display:none}
+.cli-row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:13px 14px;margin-bottom:10px;cursor:pointer;transition:border-color .18s,transform .12s}
+.cli-row:active{transform:scale(.99)}
+.cli-row.unread{border-color:var(--accent-line)}
+.ava{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;flex-shrink:0;
+  background:linear-gradient(135deg,var(--card2),var(--line));color:var(--text);font-family:'Outfit',sans-serif}
+.ava.acc{background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--btn-txt)}
+.pill{font-size:10.5px;font-weight:800;padding:4px 9px;border-radius:20px;letter-spacing:.3px;white-space:nowrap}
+.pill.on{background:rgba(52,211,153,.14);color:var(--ok)}
+.pill.wait{background:rgba(251,191,36,.14);color:var(--amber)}
+.pill.off{background:rgba(248,113,113,.14);color:var(--danger)}
+.code-box{display:flex;align-items:center;gap:10px;background:var(--card2);border:1px dashed var(--accent-line);border-radius:14px;padding:13px 15px;margin-top:12px}
+.code-val{font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;letter-spacing:3px;color:var(--accent);flex:1}
+.chat-scroll{display:flex;flex-direction:column;gap:10px}
+.msg{max-width:80%;padding:11px 14px;border-radius:17px;font-size:14.5px;line-height:1.5;white-space:pre-line;box-shadow:var(--sh-1)}
+.msg.me{align-self:flex-end;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--btn-txt);border-radius:17px 17px 5px 17px;font-weight:500}
+.msg.them{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-radius:5px 17px 17px 17px}
+.msg-t{font-size:10.5px;opacity:.62;margin-top:5px;font-weight:600}
+.msg-day{align-self:center;font-size:11px;color:var(--muted);background:var(--card2);padding:4px 12px;border-radius:20px;margin:6px 0}
+.co-input{padding:11px 14px calc(12px + env(safe-area-inset-bottom));display:flex;gap:9px;border-top:1px solid var(--line);flex-shrink:0;background:var(--nav-bg);backdrop-filter:blur(14px)}
+.co-input input{margin:0;flex:1}
+.co-input .btn{width:52px;flex-shrink:0;padding:0;height:48px}
+.empty{text-align:center;padding:44px 16px;color:var(--muted)}
+.empty .em{font-size:42px;display:block;margin-bottom:14px;opacity:.85}
+
+/* ============ PAS / PODOMÈTRE ============ */
+.steps-card{background:linear-gradient(150deg,rgba(96,165,250,.13),transparent 60%),var(--card)}
+.steps-num{font-family:'Outfit',sans-serif;font-size:34px;font-weight:800;letter-spacing:-1.4px;line-height:1}
+.steps-goal{font-size:13px;color:var(--muted);font-weight:600}
+.mini3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}
+.mini3>div{background:var(--card2);border-radius:12px;padding:10px 8px;text-align:center}
+.mini3 .v{font-family:'Outfit',sans-serif;font-size:16px;font-weight:800}
+.mini3 .l{font-size:10px;color:var(--muted);margin-top:2px;font-weight:600;letter-spacing:.4px}
+
+/* --- Divers --- */
+.big{font-family:'Outfit',sans-serif}
+.kfig{font-family:'Outfit',sans-serif;font-weight:700}
+.vol-pill{font-family:'Outfit',sans-serif;border-radius:13px}
+.t15{font-size:14.5px;font-weight:650}
+.coach-av{box-shadow:var(--sh-1)}
+.stat3 .big{letter-spacing:-.6px}
+hr.sep{border:none;border-top:1px solid var(--line);margin:16px 0}
 </style>
 </head>
 <body>
 <div id="phone">
+<!-- ============ AUTHENTIFICATION ============ -->
+<div class="screen full" id="scr-auth">
+  <div class="auth-wrap">
+    <div class="auth-logo">FORM<span>A</span></div>
+    <div class="auth-tag">Ton coach. Ton carnet. Ton journal.</div>
+
+    <div class="seg-auth">
+      <button id="auth-tab-in" class="on" onclick="authTab('in')">Connexion</button>
+      <button id="auth-tab-up" onclick="authTab('up')">Créer un compte</button>
+    </div>
+
+    <!-- CONNEXION -->
+    <div id="auth-in">
+      <label>Email</label>
+      <input type="email" id="in-mail" placeholder="ton@email.com" autocomplete="username">
+      <label>Mot de passe</label>
+      <input type="password" id="in-pass" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+      <button class="btn" style="margin-top:20px" onclick="doLogin()">Se connecter</button>
+      <div class="auth-alt">Pas encore de compte ? <b onclick="authTab('up')">Créer un compte</b></div>
+    </div>
+
+    <!-- INSCRIPTION -->
+    <div id="auth-up" style="display:none">
+      <label style="margin-top:0">Je suis</label>
+      <div class="role-grid">
+        <div class="role-card on" id="rc-client" onclick="pickRole('client')">
+          <span class="em">💪</span><div class="nm">Client</div>
+          <div class="ds">Je suis suivi par mon coach</div>
+        </div>
+        <div class="role-card" id="rc-coach" onclick="pickRole('coach')">
+          <span class="em">🎯</span><div class="nm">Coach</div>
+          <div class="ds">Je suis mes clients</div>
+        </div>
+      </div>
+
+      <label>Prénom</label>
+      <input type="text" id="up-name" placeholder="Christo">
+      <label>Email</label>
+      <input type="email" id="up-mail" placeholder="ton@email.com" autocomplete="email">
+      <label>Mot de passe</label>
+      <input type="password" id="up-pass" placeholder="6 caractères minimum" autocomplete="new-password">
+
+      <div id="up-code-wrap">
+        <label>Code de ton coach <span style="text-transform:none;letter-spacing:0;color:var(--muted)">— facultatif, tu pourras le saisir plus tard</span></label>
+        <input type="text" id="up-code" placeholder="Ex : FRM-4K2P" style="text-transform:uppercase"
+               onkeydown="if(event.key==='Enter')doSignup()">
+      </div>
+
+      <button class="btn" style="margin-top:20px" onclick="doSignup()">Créer mon compte</button>
+      <div class="auth-alt">Déjà inscrit ? <b onclick="authTab('in')">Se connecter</b></div>
+    </div>
+
+    <div class="sub" style="text-align:center;margin-top:26px;font-size:11.5px;opacity:.75">
+      🔒 Application privée · accès réservé au coach et à ses clients
+    </div>
+  </div>
+</div>
+
+<!-- ============ ACCÈS VERROUILLÉ ============ -->
+<div class="screen full" id="scr-locked">
+  <div class="lock-wrap">
+    <div id="lock-emoji" style="font-size:56px;margin-bottom:18px">⏳</div>
+    <h1 id="lock-title">En attente de validation</h1>
+    <p class="sub" id="lock-text" style="margin:12px 0 26px;max-width:300px"></p>
+    <div id="lock-actions" style="width:100%;max-width:320px"></div>
+    <button class="btn ghost sm" style="margin-top:22px" onclick="doLogout()">Se déconnecter</button>
+  </div>
+</div>
+
 <!-- ============ ONBOARDING ============ -->
 <div class="screen full" id="scr-onboarding">
   <div class="ob-head">
@@ -198,12 +409,13 @@ label{font-size:12.5px;font-weight:600;color:var(--muted);display:block;margin:1
     </div>
     <div class="row" style="gap:7px">
       <button class="icon-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
-      <button class="icon-btn" onclick="go('social')"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.4"/><path d="M2.8 20c.6-3.4 3.1-5.4 6.2-5.4s5.6 2 6.2 5.4"/><circle cx="17.2" cy="9.4" r="2.6"/><path d="M15.5 14.5c2.8.1 5 1.8 5.6 4.6"/></svg></button>
       <button class="icon-btn" onclick="go('notifs')"><svg viewBox="0 0 24 24"><path d="M18 9a6 6 0 1 0-12 0c0 6-2.5 7-2.5 7h17S18 15 18 9z"/><path d="M10 20a2.2 2.2 0 0 0 4 0"/></svg><span class="nbadge hide" id="notif-badge">0</span></button>
       <div class="coach-av" style="width:38px;height:38px" id="home-av" onclick="go('avatar')"></div>
     </div>
   </div>
-  <div class="card" style="background:linear-gradient(135deg,#1B2C44,var(--card));border-color:rgba(240,138,69,.35)">
+  <div id="home-coach-panel"></div>
+
+  <div class="card hero" id="home-session-card">
     <div class="spread">
       <div>
         <div class="tag green" style="margin-bottom:8px">SÉANCE DU JOUR</div>
@@ -212,6 +424,27 @@ label{font-size:12.5px;font-weight:600;color:var(--muted);display:block;margin:1
       </div>
     </div>
     <button class="btn" style="margin-top:14px" id="home-start" onclick="startTodayWorkout()">▶&nbsp; Démarrer la séance</button>
+  </div>
+
+  <!-- PAS DU JOUR -->
+  <div class="card steps-card" id="home-steps-card">
+    <div class="spread" style="margin-bottom:12px">
+      <div>
+        <div class="t12" style="margin:0 0 6px;letter-spacing:.8px">PAS DU JOUR</div>
+        <div class="row" style="gap:8px;align-items:flex-end">
+          <span class="steps-num" id="st-count">0</span>
+          <span class="steps-goal" id="st-goal">/ 10 000</span>
+        </div>
+      </div>
+      <span style="font-size:30px" id="st-emoji">👟</span>
+    </div>
+    <div class="bar"><i id="st-bar" style="width:0%;background:linear-gradient(90deg,var(--blue),#93C5FD)"></i></div>
+    <div class="mini3">
+      <div><div class="v" id="st-km">0,00</div><div class="l">KM</div></div>
+      <div><div class="v" id="st-kcal">0</div><div class="l">KCAL</div></div>
+      <div><div class="v" id="st-min">0</div><div class="l">MIN ACTIVES</div></div>
+    </div>
+    <div id="st-actions" style="margin-top:12px"></div>
   </div>
   <div class="card">
     <div class="spread" style="margin-bottom:12px"><h2>Nutrition du jour</h2><span class="kfig" id="home-kcal-lbl"></span></div>
@@ -222,11 +455,11 @@ label{font-size:12.5px;font-weight:600;color:var(--muted);display:block;margin:1
     <div class="spread"><h2>Hydratation</h2><span class="kfig" id="home-water-lbl"></span></div>
     <div class="row" style="gap:7px;margin-top:12px;flex-wrap:wrap" id="home-water"></div>
   </div>
-  <div class="card" style="border-color:rgba(180,139,255,.3)">
+  <div class="card tap" id="home-msg-card" onclick="go('coach')">
     <div class="row" style="align-items:flex-start">
-      <div class="coach-av" style="background:linear-gradient(135deg,var(--purple),#7a4dff);color:#fff">IA</div>
+      <div class="ava acc" id="home-msg-ava">🎯</div>
       <div class="grow">
-        <div class="t12" style="margin:0 0 4px">MESSAGE DU COACH</div>
+        <div class="t12" style="margin:0 0 4px;letter-spacing:.8px" id="home-msg-title">MESSAGE DU COACH</div>
         <div style="font-size:14px;line-height:1.5" id="home-coach-msg"></div>
       </div>
     </div>
@@ -245,7 +478,7 @@ label{font-size:12.5px;font-weight:600;color:var(--muted);display:block;margin:1
   <div class="sub" style="margin-bottom:16px" id="train-sub"></div>
   <button class="btn" onclick="startEmptyWorkout()" style="margin-bottom:10px">+ &nbsp;Séance à blanc</button>
   <button class="btn ghost" onclick="go('library')" style="margin-bottom:20px">📚&nbsp; Bibliothèque d'exercices</button>
-  <h2 style="margin-bottom:6px">Mon programme <span class="tag purple" style="vertical-align:2px">généré par IA</span></h2>
+  <h2 style="margin-bottom:6px">Mon programme <span class="tag purple" style="vertical-align:2px">sur mesure</span></h2>
   <div id="train-program"></div>
   <h2 style="margin:18px 0 6px">Historique</h2>
   <div id="train-history"><div class="sub" style="padding:10px 0">Aucune séance pour l'instant. Ta première séance t'attend 💪</div></div>
@@ -292,7 +525,7 @@ label{font-size:12.5px;font-weight:600;color:var(--muted);display:block;margin:1
   <div class="card" id="sum-prs-card"><h2 style="margin-bottom:8px">🏆 Nouveaux records</h2><div id="sum-prs"></div></div>
   <div class="card"><h2 style="margin-bottom:8px">Muscles travaillés</h2><div class="chips" id="sum-muscles" style="margin:6px 0 0"></div></div>
   <div class="card" style="border-color:rgba(240,138,69,.4)"><div class="spread"><span class="t15">🪙 Points gagnés</span><span class="vol-pill" id="sum-points">+50 pts</span></div></div>
-  <button class="btn ghost" style="margin-bottom:10px" onclick="shareLastWorkout()">📣 Partager ma séance avec la communauté</button>
+  <button class="btn ghost" style="margin-bottom:10px" onclick="sendWorkoutToCoach()">📨 Envoyer le résumé à mon coach</button>
   <button class="btn" onclick="go('home');renderHome()">Retour à l'accueil</button>
 </div>
 
@@ -327,16 +560,6 @@ label{font-size:12.5px;font-weight:600;color:var(--muted);display:block;margin:1
   </div>
 </div>
 
-<!-- ============ SOCIAL ============ -->
-<div class="screen" id="scr-social">
-  <div class="spread" style="margin-bottom:12px"><h1>Communauté</h1><span class="tag blue" id="soc-following"></span></div>
-  <div class="row" style="gap:8px;margin-bottom:14px">
-    <input placeholder="Suivre un pseudo… (ex : sarah_fit)" id="soc-input" onkeydown="if(event.key==='Enter')followUser()">
-    <button class="btn sm" style="height:48px;flex-shrink:0" onclick="followUser()">Suivre</button>
-  </div>
-  <div id="soc-feed"></div>
-</div>
-
 <!-- ============ NOTIFICATIONS ============ -->
 <div class="screen" id="scr-notifs">
   <div class="row" style="margin-bottom:14px"><button class="btn ghost sm" onclick="go('home')">←</button><h1>Notifications</h1></div>
@@ -345,10 +568,12 @@ label{font-size:12.5px;font-weight:600;color:var(--muted);display:block;margin:1
 
 <!-- ============ AVATAR & BOUTIQUE ============ -->
 <div class="screen" id="scr-avatar">
-  <div class="spread" style="margin-bottom:12px">
-    <div class="row"><button class="btn ghost sm" onclick="go('home')">←</button><h1>Mon avatar</h1></div>
+  <div class="spread" style="margin-bottom:14px">
+    <div class="row"><button class="btn ghost sm" onclick="go('home')">←</button><h1>Mon profil</h1></div>
     <span class="vol-pill" id="av-points">0 pts</span>
   </div>
+  <div class="card" id="acct-card"></div>
+  <div class="section-t">Mon avatar</div>
   <div class="stage" id="av-stage"></div>
   <div class="sub" style="margin-bottom:12px">Gagne des points en t'entraînant, en mangeant équilibré et en t'hydratant, puis habille ton avatar 👕</div>
   <h2 style="margin-bottom:10px">Boutique</h2>
@@ -385,20 +610,9 @@ label{font-size:12.5px;font-weight:600;color:var(--muted);display:block;margin:1
 
 <!-- ============ COACH ============ -->
 <div class="screen" id="scr-coach">
-  <div style="padding:18px 18px 12px;border-bottom:1px solid var(--line)">
-    <div class="row">
-      <div class="coach-av" id="chat-av"></div>
-      <div class="grow"><h2>Coach FORMA</h2><div class="t12" style="color:var(--ok)" id="coach-status">● En ligne · sport, nutrition, moral... tout m'intéresse</div></div>
-      <button class="btn ghost sm" onclick="coachSettings()">⚙</button>
-      <button class="btn ghost sm" onclick="showWeeklyReport()">📊</button>
-    </div>
-  </div>
-  <div style="flex:1;overflow-y:auto;padding:16px 16px 4px" id="chat-wrap"><div id="chat-scroll"></div></div>
-  <div style="padding:8px 14px 0;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none" id="chat-quick"></div>
-  <div style="padding:10px 14px calc(12px + env(safe-area-inset-bottom));display:flex;gap:9px">
-    <input placeholder="Pose une question à ton coach…" id="chat-input" onkeydown="if(event.key==='Enter')sendChat()">
-    <button class="btn" style="width:52px;flex-shrink:0;padding:0;height:48px" onclick="sendChat()">➤</button>
-  </div>
+  <div class="co-head" id="co-head"></div>
+  <div class="co-body" id="co-body"></div>
+  <div id="co-foot"></div>
 </div>
 
 <!-- ============ NAV / OVERLAYS ============ -->
@@ -415,7 +629,7 @@ label{font-size:12.5px;font-weight:600;color:var(--muted);display:block;margin:1
   <button class="nav-it" data-s="train" onclick="go('train')"><svg viewBox="0 0 24 24"><path d="M6.5 6.5v11M17.5 6.5v11M3 9v6M21 9v6M6.5 12h11"/></svg>Entraînement</button>
   <button class="nav-it" data-s="activity" onclick="go('activity')"><svg viewBox="0 0 24 24"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Activité</button>
   <button class="nav-it" data-s="nutrition" onclick="go('nutrition')"><svg viewBox="0 0 24 24"><path d="M12 21c-4 0-7-3-7-7 0-3.5 2.5-6 5.5-6 .8 0 1.5.2 1.5.2S12.7 8 13.5 8C16.5 8 19 10.5 19 14c0 4-3 7-7 7z"/><path d="M12 8c0-3 2-5 4-5"/></svg>Nutrition</button>
-  <button class="nav-it" data-s="coach" onclick="go('coach')"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-8 8H4l1.5-3A8 8 0 1 1 21 12z"/><path d="M9 11h.01M13 11h.01M17 11h.01"/></svg>Coach</button>
+  <button class="nav-it" data-s="coach" onclick="go('coach')"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-8 8H4l1.5-3A8 8 0 1 1 21 12z"/><path d="M9 11h.01M13 11h.01M17 11h.01"/></svg>Messages<span class="nav-dot hide" id="nav-unread">0</span></button>
 </nav>
 <script>
 /* ================= DATA ================= */
@@ -514,7 +728,25 @@ EX.push(
  {id:88,n:"Corde à sauter",en:"Jump Rope",m:"Full Body",sec:"Mollets, Cardio",eq:"pdc",lv:"Débutant",ic:"🪢",d:"Petits sauts sur la pointe des pieds, poignets qui tournent, épaules relâchées. Sans corde, mime le geste."}
 );
 /* animation pattern per exercise */
-const ANIM = {1:"ph",2:"sq",3:"hg",4:"pd",5:"pv",6:"rw",7:"ph",8:"cu",9:"tx",10:"sq",11:"lg",12:"hg",13:"lr",14:"pu",15:"tx",16:"hg",17:"pd",18:"cr",19:"pk",20:"sq",21:"rw",22:"lg",23:"rw",24:"cf",25:"sw",26:"pk",27:"ph",28:"ph",29:"ph",30:"ph",31:"ph",32:"ph",33:"pu",34:"pd",35:"rw",36:"rw",37:"pd",38:"hg",39:"lr",40:"hg",41:"pv",42:"pv",43:"lr",44:"lr",45:"rw",46:"cu",47:"cu",48:"cu",49:"cu",50:"cu",51:"tx",52:"tx",53:"ph",54:"tx",55:"sq",56:"sq",57:"sq",58:"lg",59:"sq",60:"hg",61:"hg",62:"hg",63:"hg",64:"hg",65:"lg",66:"lg",67:"hg",68:"cf",69:"cf",70:"cr",71:"cr",72:"cr",73:"pk",74:"pu",75:"sw",76:"pv",77:"lg",78:"rw",79:"sw",80:"sw",81:"sq",82:"pu",83:"lg",84:"sw",85:"cr",86:"hg",87:"sw",88:"cf"};
+const HYROX_IDS=[89,90,91,92,94,95,96,97,98,100,101,102,79,78,77];
+const ANIM = {89:"rw",90:"lg",91:"rw",92:"sw",93:"lg",94:"sq",95:"sq",96:"rw",97:"sw",98:"pk",99:"hg",100:"lg",101:"lg",102:"hg",
+ 1:"ph",2:"sq",3:"hg",4:"pd",5:"pv",6:"rw",7:"ph",8:"cu",9:"tx",10:"sq",11:"lg",12:"hg",13:"lr",14:"pu",15:"tx",16:"hg",17:"pd",18:"cr",19:"pk",20:"sq",21:"rw",22:"lg",23:"rw",24:"cf",25:"sw",26:"pk",27:"ph",28:"ph",29:"ph",30:"ph",31:"ph",32:"ph",33:"pu",34:"pd",35:"rw",36:"rw",37:"pd",38:"hg",39:"lr",40:"hg",41:"pv",42:"pv",43:"lr",44:"lr",45:"rw",46:"cu",47:"cu",48:"cu",49:"cu",50:"cu",51:"tx",52:"tx",53:"ph",54:"tx",55:"sq",56:"sq",57:"sq",58:"lg",59:"sq",60:"hg",61:"hg",62:"hg",63:"hg",64:"hg",65:"lg",66:"lg",67:"hg",68:"cf",69:"cf",70:"cr",71:"cr",72:"cr",73:"pk",74:"pu",75:"sw",76:"pv",77:"lg",78:"rw",79:"sw",80:"sw",81:"sq",82:"pu",83:"lg",84:"sw",85:"cr",86:"hg",87:"sw",88:"cf"};
+EX.push(
+ {id:89,n:"SkiErg",en:"SkiErg",m:"Full Body",sec:"Dos, Triceps, Cardio",eq:"salle",lv:"Intermédiaire",ic:"🎿",d:"Station Hyrox. Attrape les poignées bras hauts, engage les abdos et tire vers le bas en fermant le buste, hanches en arrière. La puissance vient du tronc, pas des bras."},
+ {id:90,n:"Poussée de traîneau",en:"Sled Push",m:"Quadriceps",sec:"Fessiers, Mollets, Cardio",eq:"salle",lv:"Intermédiaire",ic:"🛷",d:"Station Hyrox. Bras tendus, corps incliné vers l'avant, regard au sol. Pousse par petits pas rapides sans jamais t'arrêter, la respiration reste régulière."},
+ {id:91,n:"Traction de traîneau",en:"Sled Pull",m:"Dos",sec:"Biceps, Fessiers",eq:"salle",lv:"Intermédiaire",ic:"🪢",d:"Station Hyrox. Recule en tirant la corde main sur main, hanches basses et dos plat. Utilise le poids du corps plutôt que la force des bras."},
+ {id:92,n:"Burpee broad jump",en:"Burpee Broad Jump",m:"Full Body",sec:"Cardio",eq:"pdc",lv:"Avancé",ic:"🐸",d:"Station Hyrox. Burpee complet puis saut en longueur pieds joints. Réceptionne genoux souples et enchaîne, c'est le rythme qui compte plus que la hauteur."},
+ {id:93,n:"Fentes sac lesté",en:"Sandbag Lunges",m:"Quadriceps",sec:"Fessiers, Abdominaux",eq:"salle",lv:"Avancé",ic:"🎒",d:"Station Hyrox. Sac sur les épaules, fentes marchées, genou arrière au sol à chaque pas. Buste droit, abdos serrés pour protéger le bas du dos."},
+ {id:94,n:"Wall balls",en:"Wall Balls",m:"Quadriceps",sec:"Épaules, Cardio",eq:"salle",lv:"Intermédiaire",ic:"🏐",d:"Station Hyrox. Squat complet avec le médecine-ball à la poitrine, puis lance-le sur la cible en remontant. Rattrape en amortissant directement dans le squat suivant."},
+ {id:95,n:"Box jump",en:"Box Jump",m:"Quadriceps",sec:"Fessiers, Mollets",eq:"salle",lv:"Intermédiaire",ic:"📦",d:"Fléchis, arme les bras et saute des deux pieds sur la box. Réceptionne jambes fléchies, redresse-toi complètement puis redescends en contrôlant (ou en step-down)."},
+ {id:96,n:"Battle ropes",en:"Battle Ropes",m:"Épaules",sec:"Dos, Abdominaux, Cardio",eq:"salle",lv:"Débutant",ic:"🌊",d:"Genoux souples, gainage actif. Fais claquer des vagues alternées à un rythme soutenu, épaules basses et respiration continue."},
+ {id:97,n:"Devil press",en:"Devil Press",m:"Full Body",sec:"Épaules, Cardio",eq:"halteres",lv:"Avancé",ic:"😈",d:"Burpee haltères en main, puis remontée en un mouvement fluide jusqu'au-dessus de la tête. Garde le dos plat au moment du swing."},
+ {id:98,n:"Bear crawl",en:"Bear Crawl",m:"Abdominaux",sec:"Épaules, Quadriceps",eq:"pdc",lv:"Débutant",ic:"🐻",d:"Genoux à 3 cm du sol, dos plat comme une table. Avance main et pied opposés en même temps, sans laisser les hanches osciller."},
+ {id:99,n:"Turkish get-up",en:"Turkish Get-Up",m:"Full Body",sec:"Épaules, Abdominaux",eq:"halteres",lv:"Avancé",ic:"🕌",d:"Du sol jusqu'à debout, bras tendu au-dessus de la tête, en gardant les yeux sur le poids. Un mouvement lent, technique avant charge."},
+ {id:100,n:"Assault bike",en:"Assault Bike",m:"Full Body",sec:"Cardio",eq:"salle",lv:"Débutant",ic:"🚲",d:"Bras et jambes travaillent ensemble. Pour les intervalles, démarre fort les 10 premières secondes puis tiens la cadence sans t'écrouler."},
+ {id:101,n:"Step-up sur box",en:"Box Step-Up",m:"Fessiers",sec:"Quadriceps",eq:"halteres",lv:"Débutant",ic:"🪜",d:"Pose tout le pied sur la box, pousse dans le talon sans t'aider de la jambe arrière. Descente contrôlée, alterne les jambes."},
+ {id:102,n:"Arraché haltère",en:"Dumbbell Snatch",m:"Épaules",sec:"Dos, Fessiers",eq:"halteres",lv:"Avancé",ic:"⚡",d:"Haltère entre les pieds, dos plat. Explose des hanches et amène l'haltère au-dessus de la tête en un seul mouvement, bras verrouillé en fin de course."}
+);
 /* ===== Carte musculaire (type Hevy) ===== */
 const BACK_M=new Set(["Dos","Triceps","Ischio-jambiers","Fessiers","Mollets","Trapèzes","Lombaires"]);
 const REG_ARMS='<rect x="21.5" y="38" width="7" height="14" rx="3.5"/><rect x="71.5" y="38" width="7" height="14" rx="3.5"/>';
@@ -613,40 +845,76 @@ const DEFAULT = {onboarded:false,name:"",sex:"H",age:28,height:178,weight:78,goa
  goal:"muscle",goals:["muscle"],sports:["musculation"],injuries:[],activity:"mod",pace:0.5,dur:60,mood:"vague",
  level:"Intermédiaire",freq:4,equip:"salle",diet:"Omnivore",dietStyles:["classique"],exclusions:[],cook:"occas",
  theme:"dark",points:120,avatarG:"g",wardrobe:["tee","short","sneak"],outfit:{top:"tee",bottom:"short",shoes:"sneak",acc:null},
- nutTab:"j",apiKey:"",social:null,waterDoneDay:null,mealDoneDay:null,
+ nutTab:"j",apiKey:"",notifs:[],notifSeen:0,priority:[],steps:{},stepGoal:10000,stepDoneDay:null,
+ waterDoneDay:null,mealDoneDay:null,planSummary:"",
  water:0,waterGoal:8,streak:3,program:[],history:[],activities:[],prs:{},food:{0:[],1:[],2:[],3:[]},chat:[],lastDay:null};
-let S;
-try{S = Object.assign({}, DEFAULT, JSON.parse(localStorage.getItem("forma")||"{}"));}catch(e){S = {...DEFAULT};}
-function save(){try{localStorage.setItem("forma",JSON.stringify(S));}catch(e){}}
-// reset daily food/water on new day
+let S = Object.assign({}, DEFAULT);
 const today = new Date().toDateString();
-if(S.lastDay && S.lastDay!==today){S.water=0;S.food={0:[],1:[],2:[],3:[]};}
-S.lastDay=today;
-/* migration ancienne version */
-if(!Array.isArray(S.goals)||!S.goals.length)S.goals=[S.goal||"muscle"];
-if(!Array.isArray(S.sports))S.sports=["musculation"];
-if(!Array.isArray(S.injuries))S.injuries=[];
-if(!Array.isArray(S.activities))S.activities=[];
-if(!S.activity)S.activity="mod"; if(!S.pace)S.pace=0.5; if(!S.dur)S.dur=60; if(!S.mood)S.mood="vague";
-if(!S.theme)S.theme="dark"; if(S.points===undefined)S.points=120;
-if(!S.avatarG)S.avatarG=S.sex==="F"?"f":"g";
-if(!Array.isArray(S.wardrobe))S.wardrobe=["tee","short","sneak"];
-if(!S.outfit)S.outfit={top:"tee",bottom:"short",shoes:"sneak",acc:null};
-if(!Array.isArray(S.dietStyles))S.dietStyles=[{Omnivore:"classique","Végétarien":"vegetarien",Vegan:"vegan"}[S.diet]||"classique"];
-if(!Array.isArray(S.exclusions))S.exclusions=["Halal","Sans gluten","Sans lactose"].includes(S.diet)?[S.diet.toLowerCase().replace(" ","-")]:[];
-if(!S.cook)S.cook="occas"; if(!S.nutTab)S.nutTab="j"; if(S.apiKey===undefined)S.apiKey="";
-if(!S.social)S.social={following:["sarah_fit","karim_run"],seen:0,
- posts:[
-  {id:1,who:"sarah_fit",e:"🧘‍♀️",time:Date.now()-3600e3,type:"seance",txt:"Séance Legs terminée, les cuisses en feu 🔥",stats:"5,2 t soulevées · 52 min",likes:24,liked:false},
-  {id:2,who:"karim_run",e:"🏃",time:Date.now()-7200e3,type:"cardio",txt:"10 km ce matin au lever du soleil, quel kiff",stats:"10,0 km · 4:52 /km",likes:41,liked:true},
-  {id:3,who:"laura.lift",e:"💪",time:Date.now()-16200e3,type:"pr",txt:"NOUVEAU PR au soulevé de terre !! 110 kg 🎉",stats:"PR : 110 kg",likes:87,liked:false},
-  {id:4,who:"mehdi_calis",e:"🤸",time:Date.now()-86400e3,type:"seance",txt:"Premier muscle-up de ma vie après 6 mois de taf. Ne lâchez rien",stats:"Calisthénie · 45 min",likes:132,liked:false},
-  {id:5,who:"sarah_fit",e:"🧘‍♀️",time:Date.now()-1.5*86400e3,type:"recette",txt:"Ma recette de buddha bowl post-training, 550 kcal de bonheur 🥗",stats:"550 kcal · P 22 g",likes:19,liked:false}],
- notifs:[
-  {t:Date.now()-1800e3,txt:"❤️ sarah_fit a aimé ta dernière séance"},
-  {t:Date.now()-5400e3,txt:"👤 mehdi_calis a commencé à te suivre"},
-  {t:Date.now()-90000e3,txt:"🔥 Ta streak continue, tout le monde n'en fait pas autant"}]};
-save();
+
+/* ================= COMPTES & SESSION =================
+   Stockage local :
+   forma_users            -> [{uid,name,mail,pass,role,code,coachUid,status,created}]
+   forma_session          -> uid connecté
+   forma_state_<uid>      -> profil complet (S) de cet utilisateur
+   forma_msgs_<a>~<b>     -> conversation entre deux utilisateurs
+   Statuts client : solo | pending | active | suspended
+======================================================== */
+let CU = null;                                    // utilisateur connecté
+function usersAll(){try{return JSON.parse(localStorage.getItem("forma_users")||"[]");}catch(e){return [];}}
+function usersSave(a){try{localStorage.setItem("forma_users",JSON.stringify(a));}catch(e){}}
+function uidNow(){return localStorage.getItem("forma_session")||"";}
+function userById(id){return usersAll().find(u=>u.uid===id)||null;}
+function userByMail(m){const k=String(m||"").toLowerCase().trim();return usersAll().find(u=>u.mail===k)||null;}
+function userByCode(c){const k=String(c||"").toUpperCase().trim();return usersAll().find(u=>u.role==="coach"&&u.code===k)||null;}
+function userPatch(id,patch){
+ const a=usersAll(),i=a.findIndex(u=>u.uid===id);
+ if(i<0)return null;
+ a[i]=Object.assign(a[i],patch); usersSave(a);
+ if(CU&&CU.uid===id)CU=a[i];
+ return a[i];
+}
+function newCode(){
+ const A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let c;
+ do{c="FRM-"+Array.from({length:4},()=>A[Math.floor(Math.random()*A.length)]).join("");}while(userByCode(c));
+ return c;
+}
+function hash(s){let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))>>>0;return "h"+h.toString(36);}
+
+function stateKey(){const u=uidNow();return u?("forma_state_"+u):"forma_guest";}
+function save(){try{localStorage.setItem(stateKey(),JSON.stringify(S));}catch(e){}}
+function stateOf(uid){try{return Object.assign({},DEFAULT,JSON.parse(localStorage.getItem("forma_state_"+uid)||"{}"));}catch(e){return Object.assign({},DEFAULT);}}
+
+function loadState(){
+ try{S=Object.assign({},DEFAULT,JSON.parse(localStorage.getItem(stateKey())||"{}"));}
+ catch(e){S=Object.assign({},DEFAULT);}
+ if(S.lastDay && S.lastDay!==today){S.water=0;S.food={0:[],1:[],2:[],3:[]};}
+ S.lastDay=today;
+ migrateState();
+ save();
+}
+function migrateState(){
+ if(!Array.isArray(S.goals)||!S.goals.length)S.goals=[S.goal||"muscle"];
+ if(!Array.isArray(S.sports))S.sports=["musculation"];
+ if(!Array.isArray(S.injuries))S.injuries=[];
+ if(!Array.isArray(S.activities))S.activities=[];
+ if(!Array.isArray(S.priority))S.priority=[];
+ if(!Array.isArray(S.notifs))S.notifs=[];
+ if(typeof S.notifSeen!=="number")S.notifSeen=0;
+ if(!S.steps||typeof S.steps!=="object")S.steps={};
+ if(!S.stepGoal)S.stepGoal=10000;
+ if(!S.activity)S.activity="mod"; if(!S.pace)S.pace=0.5; if(!S.dur)S.dur=60; if(!S.mood)S.mood="vague";
+ if(!S.theme)S.theme="dark"; if(S.points===undefined)S.points=120;
+ if(!S.avatarG)S.avatarG=S.sex==="F"?"f":"g";
+ if(!Array.isArray(S.wardrobe))S.wardrobe=["tee","short","sneak"];
+ if(!S.outfit)S.outfit={top:"tee",bottom:"short",shoes:"sneak",acc:null};
+ if(!Array.isArray(S.dietStyles))S.dietStyles=[{Omnivore:"classique","Végétarien":"vegetarien",Vegan:"vegan"}[S.diet]||"classique"];
+ if(!Array.isArray(S.exclusions))S.exclusions=[];
+ if(!S.cook)S.cook="occas"; if(!S.nutTab)S.nutTab="j"; if(S.apiKey===undefined)S.apiKey="";
+ if(S.social)delete S.social;
+ if(CU&&!S.name)S.name=CU.name;
+}
+loadState();
+
 
 const GOALS = {gras:"Sécher / perdre du gras",muscle:"Prise de muscle",force:"Force",endurance:"Endurance",perf:"Performance sportive",sante:"Santé générale",mobilite:"Mobilité"};
 function goalLabel(){return S.goals.map(g=>GOALS[g]||g).join(" + ");}
@@ -694,10 +962,15 @@ function pickEx(muscles,n){
   if(inj==="poignet")["pu"].forEach(a=>EX.forEach(e=>{if(ANIM[e.id]===a)banned.add(e.id)}));
  });
  const pool = EX.filter(e=>muscles.includes(e.m)&&allow.includes(e.eq)&&lvOrder[e.lv]<=maxLv&&!banned.has(e.id));
+ const prio = new Set(S.priority||[]);
+ // les zones prioritaires passent en tête et reçoivent un exercice supplémentaire
+ const ordered = muscles.slice().sort((a,b)=>(prio.has(b)?1:0)-(prio.has(a)?1:0));
  const out=[]; const seen=new Set();
- for(const m of muscles){ for(const e of pool){ if(e.m===m&&!seen.has(e.id)){out.push(e);seen.add(e.id);break;} } }
+ for(const m of ordered){ for(const e of pool){ if(e.m===m&&!seen.has(e.id)){out.push(e);seen.add(e.id);break;} } }
+ for(const m of ordered){ if(!prio.has(m))continue;
+  for(const e of pool){ if(e.m===m&&!seen.has(e.id)){out.push(e);seen.add(e.id);break;} } }
  for(const e of pool){ if(out.length>=n)break; if(!seen.has(e.id)){out.push(e);seen.add(e.id);} }
- return out.slice(0,n);
+ return out.slice(0,Math.max(n,prio.size?n+1:n));
 }
 /* ===== Générateur v3 : HIIT, circuits, calisthénie, muscu, cardio, adapté au temps et à l'objectif ===== */
 function genProgram(){
@@ -707,6 +980,9 @@ function genProgram(){
  const mk=(name,type,fmt,ex,reps,dur,gps)=>({name,type,fmt,reps,ex,dur,gps:!!gps});
  const ids=m=>pickEx(m,nEx).map(e=>e.id);
  const hiitPool=[25,81,74,79,80,83,14,82,84,88];
+ const hyrox=S.sports.includes("hyrox");
+ const hyroxAvail=HYROX_IDS.filter(id=>{const e=EX.find(x=>x.id===id);if(!e)return false;
+  return S.equip==="salle"||e.eq==="pdc"||(S.equip==="halteres"&&e.eq!=="salle");});
  const hiitN=S.dur<=30?7:9;
  const days=[];
  if(cut||endu){
@@ -749,11 +1025,16 @@ function genProgram(){
   }
   if(S.sports.includes("crossfit")&&days.length>S.freq-1)days[days.length-1]=mk("EMOM + AMRAP","CrossFit","EMOM 12 min puis AMRAP 10 min : bats ton score !",[14,25,74,79,2],"Score à battre",Math.min(S.dur,30));
  }
+ if(hyrox){
+  const hx=hyroxAvail.length?hyroxAvail:[25,79,80,84,88];
+  days.unshift(mk("Hyrox — simulation stations","Hyrox","8 stations · 1 km de course entre chaque (ou 3 min de rameur)",hx.slice(0,8),"Station complète",Math.min(Math.max(S.dur,45),75)));
+  days.splice(2,0,mk("Hyrox — compromis force/endurance","Hyrox","4 tours · 10 reps par station · 500 m rameur entre les tours",hx.slice(0,5),"4 tours",Math.min(S.dur,50)));
+ }
  S.program=days.slice(0,S.freq);
  while(S.program.length<S.freq)S.program.push({...days[S.program.length%days.length]});
  save();
 }
-const TYPE_TAG={HIIT:"amber",Circuit:"green",Cardio:"blue",Muscu:"purple",Calisthénie:"green",CrossFit:"amber",Renfo:"blue"};
+const TYPE_TAG={HIIT:"amber",Circuit:"green",Cardio:"blue",Muscu:"purple",Calisthénie:"green",CrossFit:"amber",Renfo:"blue",Hyrox:"amber"};
 /* ================= HELPERS ================= */
 const $ = id=>document.getElementById(id);
 const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -817,18 +1098,21 @@ function stopFig(){if(figRAF)cancelAnimationFrame(figRAF);figRAF=null;figPose=nu
 
 /* ================= NAVIGATION ================= */
 function go(s){
+ if(CU && CU.role==="client" && CU.status==="suspended"){showLocked();return;}
  document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));
- $("scr-"+s).classList.add("active");
+ const el=$("scr-"+s); if(!el)return;
+ el.classList.add("active");
  document.querySelectorAll(".nav-it").forEach(b=>b.classList.toggle("on",b.dataset.s===s));
  if(s==="home")renderHome(); if(s==="train")renderTrain(); if(s==="library")renderLibrary();
  if(s==="nutrition")renderNutrition(); if(s==="coach")renderCoach(); if(s==="activity")renderActivity();
- if(s==="social")renderSocial(); if(s==="notifs")renderNotifs(); if(s==="avatar")renderAvatar();
+ if(s==="notifs")renderNotifs(); if(s==="avatar")renderAvatar();
+ refreshUnread();
 }
 
 /* ================= ONBOARDING ================= */
 let obStep=0;
 const OB_STEPS=[
- {msg:"Salut ! Moi c'est <b>Coach FORMA</b> 👋 On va faire connaissance, une question à la fois, promis c'est rapide. Pour commencer, comment tu t'appelles ?",
+ {msg:"Bienvenue sur <b>FORMA</b> 👋 Quelques questions pour construire ton programme et calculer tes besoins, une à la fois. Pour commencer, comment tu t'appelles ?",
   html:()=>`<label>Ton prénom</label><input id="ob-name" value="${esc(S.name)}" placeholder="Ex : Christo">`,
   validate:()=>{const v=$("ob-name").value.trim();if(!v){toast("Dis-moi ton prénom 🙂");return false;}S.name=v;return true;}},
  {msg:()=>`Enchanté ${esc(S.name)} ! Choisis ton avatar : il t'accompagnera partout dans l'app, et tu pourras lui acheter des tenues avec les points que tu gagneras en t'entraînant 👕`,
@@ -839,10 +1123,12 @@ const OB_STEPS=[
  {msg:"Et là tout de suite, tu te sens comment par rapport au sport ? Sois honnête, ça m'aide à te parler comme il faut.",
   html:()=>chips("mood",[["fond","🔥 Hyper motivé, je veux tout casser"],["vague","🌊 Motivé, mais ça dépend des jours"],["pouce","🙏 J'ai besoin qu'on me pousse un peu"],["doux","🌱 Je reprends en douceur"]])},
  {msg:"Tu pratiques quoi comme sport, ou tu aimerais pratiquer quoi ? Coche tout ce qui te tente.",
-  html:()=>chipsM("sports",[["musculation","🏋️ Musculation"],["running","🏃 Running"],["cyclisme","🚴 Cyclisme"],["natation","🏊 Natation"],["collectif","⚽ Sports collectifs"],["combat","🥊 Sports de combat"],["crossfit","🔥 CrossFit"],["calisthenie","🤸 Calisthénie"],["yoga","🧘 Yoga / Pilates"]]),
+  html:()=>chipsM("sports",[["musculation","🏋️ Musculation"],["running","🏃 Running"],["cyclisme","🚴 Cyclisme"],["natation","🏊 Natation"],["collectif","⚽ Sports collectifs"],["combat","🥊 Sports de combat"],["crossfit","🔥 CrossFit"],["hyrox","🏟️ Hyrox / course à obstacles"],["calisthenie","🤸 Calisthénie"],["yoga","🧘 Yoga / Pilates"]]),
   validate:()=>{if(!S.sports.length){toast("Choisis au moins un sport 🙂");return false;}return true;}},
  {msg:"Tu te situes où niveau expérience ?",
   html:()=>chips("level",[["Débutant","🌱 Débutant"],["Intermédiaire","⚡ Intermédiaire"],["Avancé","🔥 Avancé"],["Compétiteur","🏆 Compétiteur"]])},
+ {msg:"Il y a des zones que tu veux vraiment développer en priorité ? Je leur donnerai plus de volume dans ton programme.",
+  html:()=>chipsM("priority",[["Pectoraux","🫀 Pectoraux"],["Dos","🔙 Dos"],["Épaules","🎽 Épaules"],["Biceps","💪 Biceps"],["Triceps","🦾 Triceps"],["Abdominaux","🧊 Abdos"],["Quadriceps","🦵 Quadriceps"],["Fessiers","🍑 Fessiers"],["Ischio-jambiers","🦿 Ischios"],["Mollets","🐄 Mollets"]])},
  {msg:"Combien de séances par semaine tu peux tenir, sans te mentir ? Mieux vaut 3 vraies que 6 imaginaires 😄",
   html:()=>chips("freq",[[2,"2"],[3,"3"],[4,"4"],[5,"5"],[6,"6"]])},
  {msg:"Et combien de temps par séance ?",
@@ -875,7 +1161,7 @@ function toggleM(key,v,el){S[key]=S[key]||[];const i=S[key].indexOf(v);if(i>=0){
 function renderOb(){
  $("ob-prog").innerHTML=OB_STEPS.map((_,i)=>`<i class="${i<=obStep?"done":""}"></i>`).join("");
  const st=OB_STEPS[obStep];
- $("ob-body").innerHTML=`<div class="coach-bubble"><div class="coach-av">IA</div><div class="coach-msg">${typeof st.msg==="function"?st.msg():st.msg}</div></div>`+st.html();
+ $("ob-body").innerHTML=`<div class="coach-bubble"><div class="coach-av">FA</div><div class="coach-msg">${typeof st.msg==="function"?st.msg():st.msg}</div></div>`+st.html();
  $("ob-next").textContent = obStep===OB_STEPS.length-1 ? "⚡ Générer mon programme" : "Continuer";
  const inp=$("ob-name"); if(inp)inp.focus();
 }
@@ -885,8 +1171,8 @@ function obNext(){
  save();
  if(obStep<OB_STEPS.length-1){obStep++;renderOb();return;}
  // finish
- $("ob-body").innerHTML=`<div style="text-align:center;padding:60px 10px"><div class="coach-av" style="width:70px;height:70px;font-size:24px;margin:0 auto 20px">IA</div>
- <h2>Je construis ton programme…</h2><p class="sub" style="margin-top:10px">Analyse de ton profil · sélection des exercices · calcul des macros</p>
+ $("ob-body").innerHTML=`<div style="text-align:center;padding:60px 10px"><div class="coach-av" style="width:70px;height:70px;font-size:24px;margin:0 auto 20px">FA</div>
+ <h2>Construction de ton programme…</h2><p class="sub" style="margin-top:10px">Analyse de ton profil · sélection des exercices · calcul des macros</p>
  <div class="bar" style="margin-top:24px"><i id="ob-load" style="width:5%"></i></div></div>`;
  $("ob-next").style.display="none";
  let w=5;const iv=setInterval(()=>{w+=Math.random()*22;$("ob-load").style.width=Math.min(w,100)+"%";if(w>=100){clearInterval(iv);finishOb();}},280);
@@ -894,12 +1180,14 @@ function obNext(){
 function finishOb(){
  genProgram(); S.onboarded=true;
  const t=targets();
- S.chat=[{who:"ai",txt:`Ça y est ${S.name}, ton plan est prêt ! 🎯\n\nPour tes objectifs (${goalLabel().toLowerCase()}), je t'ai préparé ${S.program.length} séances par semaine : ${S.program.map(p=>p.name.split(" (")[0]).join(", ")}.\n\nCôté nutrition, voilà comment j'ai calculé : ton métabolisme de base est de ${t.bmr} kcal, ta dépense totale d'environ ${t.tdee} kcal avec ton quotidien et tes ${S.freq} entraînements. Avec ton rythme de ${S.pace} kg par semaine, je te conseille **${t.kcal} kcal par jour** : ${t.p} g de protéines, ${t.c} g de glucides et ${t.f} g de lipides.\n\n${S.injuries.length?"Et promis, j'ai écarté les exercices qui sollicitent : "+S.injuries.join(", ")+".\n\n":""}Si tu te demandes pourquoi ce découpage : avec ${S.freq} séances par semaine, chaque muscle est travaillé 2 fois avec 48 h de repos entre les deux. C'est ce qui marche le mieux. Je t'ai aussi prévu une semaine plus légère toutes les 5 semaines pour récupérer.\n\nEt surtout, je ne suis pas là que pour les programmes. Motivation, stress, sommeil, coup de mou... parle-moi de tout, c'est mon job 😊`}];
+ S.planSummary=`Programme : ${S.program.map(p=>p.name).join(", ")} · ${t.kcal} kcal/j (P ${t.p} / G ${t.c} / L ${t.f})`;
+ pushNotif("🎯 Ton programme est prêt : "+S.program.length+" séances par semaine.");
+ sendProfileToCoach();
  save();
  $("scr-onboarding").classList.remove("active");
  $("nav").classList.add("show");
  confetti(); go("home");
- setTimeout(()=>toast("🎉 Programme généré ! Ton coach t'attend dans l'onglet Coach."),600);
+ setTimeout(()=>toast("🎉 Ton programme est prêt, bonne séance !"),600);
 }
 function skipOnboarding(){S.onboarded=true;S.name=S.name||"Champion";genProgram();save();$("scr-onboarding").classList.remove("active");$("nav").classList.add("show");go("home");}
 
@@ -951,12 +1239,39 @@ function coachDaily(){
  const day=Math.floor(Date.now()/864e5);
  return pool[day%pool.length];
 }
+function renderHomeMsg(){
+ if(!$("home-coach-msg"))return;
+ const titre=$("home-msg-title"), ava=$("home-msg-ava"), corps=$("home-coach-msg");
+ if(CU && CU.role==="coach"){
+  const cl=myClients();
+  let last=null,who=null;
+  cl.forEach(c=>{const m=convGet(CU.uid,c.uid).filter(x=>x.from===c.uid).pop();if(m&&(!last||m.t>last.t)){last=m;who=c;}});
+  ava.textContent="💬"; titre.textContent="DERNIER MESSAGE REÇU";
+  corps.innerHTML = last
+   ? "<b>"+esc(who.name)+"</b> · "+esc(last.txt.split("\n")[0])
+   : "Aucun message de tes clients pour l'instant. Partage ton code <b>"+esc(CU.code)+"</b> pour qu'ils te rejoignent.";
+  return;
+ }
+ if(CU && CU.coachUid && CU.status==="active"){
+  const coach=userById(CU.coachUid);
+  const m=convGet(CU.uid,CU.coachUid).filter(x=>x.from===CU.coachUid).pop();
+  ava.textContent="🎯"; titre.textContent="MESSAGE DE "+esc((coach?coach.name:"TON COACH").toUpperCase());
+  corps.innerHTML = m ? esc(m.txt.split("\n")[0]) : "Écris à ton coach quand tu veux, il te répond ici.";
+  return;
+ }
+ ava.textContent="💡"; titre.textContent="TON RAPPEL DU JOUR";
+ corps.innerHTML=coachDaily();
+}
 function renderHome(){
  const d=new Date();
  $("home-date").textContent=d.toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"});
  $("home-greet").textContent=(d.getHours()<18?"Salut":"Bonsoir")+" "+(S.name||"Champion")+" 👋";
  $("home-av").innerHTML=avatarSVG(34);
  updateBadge();
+ renderHomePanel();
+ renderSteps();
+ const coachOnly = CU && CU.role==="coach";
+ $("home-session-card").classList.toggle("hide",false);
  $("theme-btn").textContent=S.theme==="dark"?"☀️":"🌙";
  const idx = S.history.length % Math.max(S.program.length,1);
  const w = S.program[idx];
@@ -969,7 +1284,7 @@ function renderHome(){
  $("home-macros").innerHTML=[["Protéines",e.p,t.p,"var(--accent)"],["Glucides",e.c,t.c,"var(--blue)"],["Lipides",e.f,t.f,"var(--amber)"]]
   .map(([l,v,g,c])=>`<div><div class="big" style="font-size:18px;color:${c}">${v}<span style="font-size:11px;color:var(--muted)">/${g}g</span></div><div class="t12">${l}</div></div>`).join("");
  renderWater("home-water","home-water-lbl");
- $("home-coach-msg").innerHTML=coachDaily();
+ renderHomeMsg();
  const prKeys=Object.keys(S.prs);
  $("home-next-pr").textContent = prKeys.length? (()=>{const k=prKeys[prKeys.length-1];const ex=EX.find(x=>x.id==k);return (ex?ex.n:"?")+" : battre "+S.prs[k]+" kg";})() : "Fais ta première séance pour définir tes records !";
 }
@@ -1002,9 +1317,11 @@ function figThumb(pat){
 }
 /* ================= TRAIN HUB & LIBRARY ================= */
 function renderTrain(){
- $("train-sub").textContent = S.history.length+" séance(s) au total · programme "+(S.freq<=3?"Full Body":S.freq===4?"Upper/Lower":"PPL")+" · "+S.freq+"j/sem";
+ const types=[...new Set(S.program.map(p=>p.type))];
+ const lbl = types.length>1 ? types.join(" + ") : (S.freq<=3?"Full Body":S.freq===4?"Upper/Lower":"PPL");
+ $("train-sub").textContent = S.history.length+" séance(s) au total · "+lbl+" · "+S.freq+"j/sem"+(S.priority.length?" · priorité "+S.priority.join(", ").toLowerCase():"");
  const idx = S.history.length % Math.max(S.program.length,1);
- $("train-program").innerHTML = S.program.map((p,i)=>`<div class="card" style="padding:14px ${i===idx?";border-color:rgba(240,138,69,.45)":""}">
+ $("train-program").innerHTML = S.program.map((p,i)=>`<div class="card" style="padding:14px ${i===idx?";border-color:var(--accent-line)":""}">
   <div class="spread"><div class="grow">
   <div class="t15">${p.name} <span class="tag ${TYPE_TAG[p.type]||""}">${p.type||"Muscu"}</span> ${i===idx?'<span class="tag green">AUJOURD\'HUI</span>':""}</div>
   <div class="t12">${p.gps?"Course/vélo tracké au GPS":p.ex.map(id=>{const e=EX.find(x=>x.id===id);return e?e.n:""}).filter(Boolean).slice(0,3).join(" · ")+(p.ex.length>3?" +"+(p.ex.length-3):"")}</div>
@@ -1159,7 +1476,7 @@ function finishWorkout(){
  const pts=50+25*prs.length;
  S.points+=pts;save();
  $("sum-points").textContent="+"+pts+" pts";
- if(S.streak===7||S.streak===30){S.social.notifs.unshift({t:Date.now(),txt:"🔥 Streak de "+S.streak+" jours ! Tu fais partie des plus réguliers."});save();}
+ if(S.streak===7||S.streak===30)pushNotif("🔥 Série de "+S.streak+" jours ! Tu tiens le rythme.");
  $("sum-prs-card").classList.toggle("hide",!prs.length);
  $("sum-prs").innerHTML=prs.map(p=>`<div class="spread" style="padding:6px 0"><div class="t15">${p.n}</div><span class="tag amber">${p.w} kg 🏆</span></div>`).join("");
  $("sum-muscles").innerHTML=[...muscles].map(m=>`<span class="tag green">${m}</span>`).join("");
@@ -1174,7 +1491,8 @@ function burnedToday(){
  const t0=new Date();t0.setHours(0,0,0,0);
  const acts=S.activities.filter(a=>a.date>=t0).reduce((s,a)=>s+Math.round(a.dist/1000*(a.type==="Vélo"?25:62)),0);
  const works=S.history.filter(h=>h.date>=t0).reduce((s,h)=>s+h.dur*6,0);
- return Math.round(acts+works);
+ const st=(S.steps&&S.steps[today])?Math.round(S.steps[today].n*0.00045*(S.weight||75)):0;
+ return Math.round(acts+works+st);
 }
 function renderNutrition(){
  const t=targets(),e=eaten(),burn=burnedToday();
@@ -1417,115 +1735,6 @@ function confirmFood(mi,src,fi){
 }
 
 /* ================= COACH IA ================= */
-function renderCoach(){
- $("chat-av").innerHTML=avatarSVG(30);
- $("coach-status").textContent=S.apiKey?"● Vraie IA connectée · conversation illimitée ✨":"● En ligne · sport, nutrition, moral... tout m'intéresse";
- if(!S.chat.length)S.chat=[{who:"ai",txt:`Salut ${S.name||"champion"} ! 👋 Content de te voir. Ici tu peux tout me dire : une question d'entraînement, un doute sur un repas, un coup de stress, une baisse de motivation ou juste envie de parler de ta journée. Il n'y a pas de mauvaise question. Alors, comment tu te sens aujourd'hui ?`}];
- $("chat-scroll").innerHTML=S.chat.map(m=>`<div class="msg ${m.who}">${m.who==="ai"?m.txt.replace(/\*\*(.+?)\*\*/g,"<b>$1</b>"):esc(m.txt)}</div>`).join("");
- $("chat-quick").innerHTML=QUICK.map((q,i)=>`<button class="chip" style="padding:8px 13px;font-size:12.5px;flex-shrink:0" onclick="quickAsk(${i})">${esc(q)}</button>`).join("");
- scrollChat();
-}
-const QUICK=["Je manque de motivation","Je suis stressé en ce moment","Je dors mal","Je peux manger une pizza ce soir ?","J'ai mal au genou","Remplace le développé couché","Plan semi-marathon 3 mois"];
-function quickAsk(i){$("chat-input").value=QUICK[i];sendChat();}
-function scrollChat(){const w=$("chat-wrap");w.scrollTop=w.scrollHeight;}
-async function sendChat(){
- const inp=$("chat-input"),txt=inp.value.trim();if(!txt)return;
- inp.value="";S.chat.push({who:"user",txt});save();renderCoach();
- const ty=document.createElement("div");ty.className="msg ai typing";ty.innerHTML="<i></i><i></i><i></i>";
- $("chat-scroll").appendChild(ty);scrollChat();
- let r=null;
- if(S.apiKey){try{r=await aiReply();}catch(e){r=null;}}
- if(!r){await new Promise(res=>setTimeout(res,700+Math.random()*600));r=smartReply(txt);}
- ty.remove();S.chat.push({who:"ai",txt:r});save();renderCoach();
-}
-/* ===== Vraie IA (optionnel) : branche ta clé API Anthropic dans ⚙ ===== */
-function buildSystem(){
- const t=targets(),e=eaten();
- return `Tu es Coach FORMA, coach sportif et nutritionnel français, chaleureux et naturel. Tu parles comme un ami proche qui connaît très bien le sport (musculation, HIIT, calisthénie, course, tous sports), la nutrition et la psychologie du bien-être. Tutoie, fais des réponses courtes (2-4 paragraphes max), pose souvent une question en retour, n'utilise jamais de tirets cadratins ni de listes à puces. Si la personne évoque une douleur persistante ou une vraie détresse, conseille avec bienveillance de consulter un professionnel.
-Profil de ${S.name} : ${S.sex==="F"?"femme":"homme"}, ${S.age} ans, ${S.height} cm, ${S.weight} kg (objectif ${S.goalWeight} kg). Objectifs : ${goalLabel()}. Niveau ${S.level}, ${S.freq} séances/sem de ${S.dur} min, équipement ${S.equip}. Motivation : ${S.mood}. Blessures : ${S.injuries.join(", ")||"aucune"}. Régimes : ${S.dietStyles.join(", ")} ; exclusions : ${S.exclusions.join(", ")||"aucune"}.
-Aujourd'hui : ${e.k} kcal mangées sur ${t.kcal} (protéines ${e.p}/${t.p} g), hydratation ${S.water}/${S.waterGoal} verres, ${S.history.length} séances au total, records : ${Object.keys(S.prs).length}. Programme : ${S.program.map(p=>p.name).join(", ")}.`;
-}
-async function aiReply(){
- const msgs=S.chat.slice(-14).map(m=>({role:m.who==="ai"?"assistant":"user",content:m.txt}));
- const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",
-  headers:{"content-type":"application/json","x-api-key":S.apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
-  body:JSON.stringify({model:"claude-haiku-4-5-20251001",max_tokens:700,system:buildSystem(),messages:msgs})});
- const j=await r.json();
- if(j.content&&j.content[0]&&j.content[0].text)return j.content[0].text;
- throw new Error("api");
-}
-function coachSettings(){
- openSheet(`<h2 style="margin-bottom:6px">⚙ Cerveau du coach</h2>
- <p class="sub" style="margin-bottom:12px">Par défaut, le coach fonctionne avec un moteur local (mode démo). Pour une vraie conversation illimitée type ChatGPT/Claude, colle une clé API Anthropic : le coach aura alors tout ton profil et ton historique en tête, en temps réel.</p>
- <label>Clé API Anthropic (optionnel)</label>
- <input id="api-key-in" type="password" placeholder="sk-ant-..." value="${esc(S.apiKey)}">
- <div class="t12" style="margin:8px 0 14px">La clé reste stockée uniquement sur ton appareil. Dans la version finale de l'app, l'IA sera incluse dans l'abonnement, sans clé à fournir.</div>
- <button class="btn" onclick="S.apiKey=$('api-key-in').value.trim();save();closeSheet();renderCoach();toast(S.apiKey?'✨ Vraie IA connectée !':'Mode local activé')">Enregistrer</button>`);
-}
-/* ===== Moteur local v2 : mémoire, variantes, suivi de conversation ===== */
-function smartReply(txt){
- const l=txt.toLowerCase().trim();
- const li=S.lastIntent||"";
- S.varIdx=S.varIdx||{};
- const pickVar=(key,arr)=>{const i=(S.varIdx[key]||0)%arr.length;S.varIdx[key]=i+1;save();const v=arr[i];return typeof v==="function"?v():v;};
- if(/^(salut|bonjour|bonsoir|coucou|hello|yo|wesh|hey)[\s!.,]*$/.test(l)){S.lastIntent="smalltalk";return pickVar("hi",[
-  ()=>`Salut ${S.name} ! Content de te voir. Quoi de neuf, la forme ?`,
-  ()=>`Hey ${S.name} ! Alors, comment s'est passée ta journée ?`,
-  ()=>`Coucou ! Toujours un plaisir. On parle entraînement, assiette, ou tu as juste envie de papoter ?`]);}
- if(/^(ça va|ca va|bien et toi|tranquille|la forme|et toi)[\s?!.]*$/.test(l)){S.lastIntent="smalltalk";return pickVar("cv",[
-  `Moi ça va toujours, je carbure aux répétitions 😄 Et toi, sur une échelle de 1 à 10, tu te sens comment là ?`,
-  `Impeccable, surtout quand tu passes me voir ! Raconte, quoi de prévu aujourd'hui ?`]);}
- if(/^(oui|ouais|yes|ok|d'accord|carrément|vas-?y|allez|go|je veux bien)[\s!.]*$/.test(l)){
-  if(li==="squat"||li==="remplace")return `Parfait, c'est noté pour ta prochaine séance ✅ Autre chose que je peux ajuster pendant qu'on y est ?`;
-  if(li==="programme"){genProgram();return `Et voilà, programme régénéré ! File voir l'onglet Entraînement et dis-moi ce que tu en penses.`;}
-  if(li==="course")return `Super ! Première étape cette semaine : un footing tranquille de 30 min, allure discussion. Tu me racontes après ?`;
-  if(li==="moral")return `Je t'écoute. Prends ton temps, dis-moi ce qui te pèse en ce moment.`;
-  return `Ça marche ! Dis-moi par quoi tu veux qu'on commence et on y va.`;}
- if(/^(non|nan|pas trop|bof|pas vraiment)[\s.!]*$/.test(l)){
-  if(li==="douleur")return `Tant mieux si ça s'est calmé. On reste prudents cette semaine quand même, et tu me redis direct si ça revient.`;
-  if(li==="moral")return `OK, pas de pression. Sache juste que je suis là quand tu veux, même pour parler d'autre chose. Une petite séance douce, ça te tenterait ?`;
-  return `Pas de souci. Qu'est-ce qui te ferait plaisir alors ? Une idée de séance, un conseil repas, ou autre chose ?`;}
- if(/^pourquoi[\s?]*$/.test(l))return `Bonne question ! En deux mots : tout ce que je te propose cherche le meilleur ratio résultats/risque pour TON profil (${goalLabel().toLowerCase()}, niveau ${S.level.toLowerCase()}). Tu veux que je détaille un point en particulier ?`;
- const r=coachReply(txt);
- const map=[["douleur",/genou|douleur|mal (au|à|aux)|blessure/],["remplace",/remplace|alternative/],["squat",/squat/],["course",/semi|marathon|courir|course/],["programme",/programme|régénère|plan|séance/],["nutrition",/pizza|protéine|macro|manger|calorie/],["moral",/stress|dors|motiv|déprim|moral|coup de mou|fatigue/]];
- S.lastIntent="";for(const [k,re] of map){if(re.test(l)){S.lastIntent=k;break;}}
- if(r===S.lastReply)return r+`\n\nEt si je me répète, c'est que j'ai besoin d'en savoir plus 😅 Dis-moi précisément ce qui te bloque, je m'adapte.`;
- S.lastReply=r;save();
- return r;
-}
-function coachReply(q){
- const l=q.toLowerCase();const t=targets(),e=eaten();const rest=t.kcal-e.k;const n=S.name,f=fem();
- if(/régénère|regenere|nouveau programme|change mon programme/.test(l)){genProgram();return `Et voilà, c'est fait ! ✅ Ton nouveau programme : ${S.program.map(p=>p.name).join(", ")}, en ${S.program[0].reps} par exercice. Va jeter un œil dans l'onglet Entraînement et dis-moi ce que tu en penses, on peut encore ajuster.`;}
- if(/(remplace|alternative|pas de banc|sans banc).*(couché|bench)|(couché|bench).*(remplace|sans banc|pas de banc)|remplace le développé/.test(l))
-  return `Ah, pas de banc sous la main ? Pas de souci, ça arrive tout le temps. Je te conseille dans l'ordre :\n\nLes **pompes lestées** avec un sac à dos, c'est le même mouvement et tu peux charger. Sinon le **développé haltères au sol**, très sûr même si l'amplitude est un peu réduite. Et les **dips prise large** marchent super bien pour les pectoraux aussi.\n\nGarde le même volume qu'avant, ${S.goals.includes("force")?"5 séries de 5":"4 séries de 8 à 12"}. Tu veux que je modifie ta prochaine séance ?`;
- if(/pizza|burger|kebab|fast|tricher|cheat/.test(l))
-  return rest>500
-   ? `Bonne nouvelle ${n} : il te reste **${rest} kcal** aujourd'hui, donc une pizza margherita entière (environ 860 kcal) ${rest>860?"passe tranquille":"passe si tu allèges un peu le reste de la journée"} 🍕\n\nMon petit conseil : ajoute une source de protéines à côté, une salade de poulet par exemple, pour tenir tes ${t.p} g. Et rappelle-toi, un écart prévu ce n'est pas un écart, c'est de la flexibilité. Fais-toi plaisir !`
-   : `Alors, il ne te reste que **${Math.max(rest,0)} kcal** aujourd'hui, une pizza entière te ferait pas mal dépasser. Deux options : tu en manges la moitié ce soir avec un skyr en dessert, ou tu la décales à demain midi autour de ta séance, là où tes glucides seront le mieux utilisés.\n\nEt franchement ? Si c'est un moment entre amis, profite. C'est la régularité sur la semaine qui compte, pas un jour parfait.`;
- if(/genou|douleur|mal (au|à|aux)|blessure|épaule|dos me/.test(l))
-  return `Merci de me le dire tout de suite, c'est important. 🩺\n\nRègle numéro un : aucun exercice qui reproduit la douleur. Pour un genou, on coupe les squats profonds, les fentes et les impacts pendant 48 à 72 h. En attendant tu peux continuer le haut du corps normalement, faire du leg curl léger si c'est indolore, et de la mobilité douce.\n\nPar contre, si ça persiste plus de 5 jours, que c'est aigu ou que ça gonfle, va voir un médecin ou un kiné. Je peux adapter ton programme, mais je ne remplace pas un soignant. Tiens-moi au courant demain ?`;
- if(/semi|marathon|10 ?km|course|courir/.test(l))
-  return `Un semi, excellente idée ! 🏃 Voilà comment je te vois le préparer en 12 semaines, avec 3 sorties par semaine.\n\nLes 4 premières semaines, on construit la base : 2 footings faciles de 40 à 50 min où tu peux tenir une conversation, plus une sortie longue qui monte de 8 à 12 km. Ensuite, semaines 5 à 8, on rentre dans le spécifique avec du fractionné (genre 6 fois 800 m à ton allure cible) et une sortie longue jusqu'à 16 km. Semaines 9 à 11, on monte au pic : 18 km max. Et la dernière semaine, tu lèves le pied, moitié moins de volume, course le dimanche.\n\nJe garde 2 séances de renfo par semaine pour protéger tes articulations. Ça te va ?`;
- if(/squat/.test(l))
-  return `Le squat, mon exercice préféré ! 🦵 Retiens ça :\n\nPieds largeur d'épaules, pointes légèrement ouvertes. Tu descends comme si tu allais t'asseoir entre tes talons, hanches en arrière et genoux vers l'avant en même temps. Vise les hanches sous les genoux si ta mobilité le permet, dos neutre, regard devant. Et pour remonter : pousse le sol, genoux dans l'axe des orteils, expire en haut.\n\nL'erreur classique, ce sont les genoux qui rentrent vers l'intérieur. Filme-toi de face une fois par semaine, tu verras tout de suite. Tu veux que je te le programme à ta prochaine séance ?`;
- if(/protéine|proteine|macro/.test(l))
-  return `Alors, tes chiffres du jour : **${e.p} g sur ${t.p} g de protéines**, avec une cible de ${(t.p/S.weight).toFixed(1)} g par kilo adaptée à ton objectif.\n\n${e.p<t.p*0.7?"Tu es un peu en retard, mais rien de grave : vise une source de protéines à chaque repas, œufs, poulet, skyr, tofu ou whey, et tu recolles vite.":"Tu es bien parti"+f+", continue comme ça !"}\n\nPetite astuce au passage : répartis-les sur 4 prises d'environ ${Math.round(t.p/4)} g plutôt que 2 grosses, ton corps les utilise mieux.`;
- if(/stress|anxieu|anxiét|angoiss|pression|débordé/.test(l))
-  return `Hé, respire un coup ${n}. 😌 Le stress fait partie de la vie, mais tu as un super outil entre les mains : le sport est l'un des meilleurs régulateurs qui existent.\n\nQuand la pression monte, une séance même courte fait des merveilles : 20 minutes de marche rapide ou une séance légère, et ton cerveau relâche la soupape. Évite juste les séances très lourdes les jours où tu es à plat, ton corps encaisse déjà beaucoup.\n\nEt en dehors du sport : la cohérence cardiaque (5 secondes d'inspiration, 5 d'expiration pendant 5 minutes) marche vraiment bien. Tu veux me raconter ce qui te met la pression en ce moment ? Parfois ça aide juste d'en parler.`;
- if(/dors mal|insomnie|sommeil|dormi/.test(l))
-  return `Le sommeil, c'est la base de tout : ta récup, ton humeur, tes résultats. Alors prenons ça au sérieux.\n\nQuelques leviers qui changent la donne : des horaires réguliers même le week-end, pas d'écran dans les 30 dernières minutes, une chambre fraîche autour de 18 degrés, et pas de caféine après 14 h. Côté sport, entraîne-toi plutôt le matin ou en début de soirée, une grosse séance tardive peut retarder l'endormissement.\n\nSi malgré tout ça tu dors mal depuis plusieurs semaines, parles-en à ton médecin, ça vaut le coup de creuser. En attendant, dis-moi : c'est plutôt l'endormissement qui coince, ou les réveils nocturnes ?`;
- if(/motivation|motivé|flemme|démotiv|envie de rien|lassé|abandonner/.test(l))
-  return `Je vais te dire un truc que peu de coachs avouent : la motivation, c'est surfait. 😄 Elle va, elle vient, et les gens qui réussissent ne sont pas plus motivés que toi, ils ont juste des habitudes plus solides.\n\nAlors on va ruser. Réduis la marche : au lieu de "je dois faire ma séance", dis-toi "je mets mes baskets et je fais 10 minutes". C'est tout. Neuf fois sur dix, une fois lancé${f}, tu finis la séance. Et si tu t'arrêtes à 10 minutes, c'est déjà une victoire.\n\nTa streak est à ${S.streak} jours, tu as déjà prouvé que tu sais tenir. Qu'est-ce qui te pèse le plus en ce moment : le temps, la fatigue, ou l'impression de ne pas avancer ?`;
- if(/déprim|triste|moral|pas bien|coup de mou|seul|vide/.test(l))
-  return `Merci de m'en parler ${n}, vraiment. Ça demande du courage de le dire, même à un coach. 💙\n\nLes coups de mou, on en a tous, et le mouvement est souvent un bon allié : une simple marche dehors à la lumière du jour fait déjà du bien au moral. Pas besoin de performance en ce moment, juste de bouger doucement et de bien manger.\n\nPar contre, si cette sensation dure depuis plusieurs semaines ou te pèse vraiment, parle-m'en mais parle aussi à un proche ou à un professionnel. Tu mérites d'être bien entouré${f}, et demander de l'aide, c'est une force. Je suis là tous les jours si tu veux vider ton sac.`;
- if(/fatigue|repos|récup/.test(l))
-  return `Écoute ton corps, il te parle. 😴 Si tu es fatigué${f} aujourd'hui, deux options : une séance allégée à moins 30 % de charge, ou un vrai repos. Et je te rassure, un jour de repos ne fait jamais reculer. Une blessure, si.\n\nPour bien récupérer, la recette est simple : 7 à 9 h de sommeil, tes ${t.p} g de protéines, de l'eau (ton objectif c'est ${S.waterGoal*0.25} L), et la semaine légère que je t'ai déjà planifiée toutes les 5 semaines. Comment tu te sens là, sur 10 ?`;
- if(/programme|séance|plan|entraînement/.test(l))
-  return `Ton programme actuel, c'est **${S.freq} séances par semaine** en ${S.freq<=3?"Full Body":S.freq===4?"Upper/Lower":"Push Pull Legs"} : ${S.program.map(p=>p.name.split(" (")[0]).join(", ")}.\n\nPourquoi ce découpage ? Parce qu'à ${S.freq} jours par semaine, c'est celui qui fait travailler chaque muscle 2 fois en respectant 48 h de récup, et c'est ce que la recherche montre de plus efficace.\n\nSi ton équipement ou tes dispos ont changé, dis-moi juste "régénère mon programme" et je te refais ça.`;
- if(/merci|top|super|parfait|génial/.test(l))
-  return `Avec plaisir ${n} ! 💪 C'est un vrai plaisir de bosser avec toi. On se retrouve à ta prochaine séance, ${S.program[(S.history.length)%Math.max(S.program.length,1)]?.name||"séance libre"} au programme. Et n'oublie pas : je suis là pour tout, pas que pour les barres et les assiettes 😉`;
- return `Bonne question, laisse-moi te répondre avec ce que je sais de toi (${goalLabel().toLowerCase()}, niveau ${S.level.toLowerCase()}).\n\nQuoi qu'il arrive, tes trois fondamentaux restent les mêmes : progresser un petit peu à chaque séance, tenir tes **${t.p} g de protéines** par jour, et dormir 7 à 9 h. Tout le reste, c'est du réglage fin.\n\nEt tu sais, tu peux vraiment tout me demander : un exercice de remplacement, un avis sur un repas, un plan course, un coup de mou, du stress... Je suis là pour ça. C'est quoi ta vraie question du moment ?`;
-}
 function showWeeklyReport(){
  const week=S.history.filter(x=>Date.now()-x.date<7*864e5);
  const vol=week.reduce((a,x)=>a+x.vol,0);const t=targets(),e=eaten();
@@ -1709,7 +1918,32 @@ function avatarSVG(sz){
   <rect x="33" y="112" width="15" height="8" rx="4" fill="${sho}"/><rect x="52" y="112" width="15" height="8" rx="4" fill="${sho}"/>
  </svg>`;
 }
+function renderAccount(){
+ const c=$("acct-card"); if(!c||!CU)return;
+ const role = CU.role==="coach" ? "🎯 Coach" : (CU.status==="active"?"💪 Client suivi":CU.status==="solo"?"💪 Client (sans coach)":"💪 Client");
+ const coach = CU.coachUid?userById(CU.coachUid):null;
+ c.innerHTML=`
+  <div class="row" style="margin-bottom:14px">
+   <div class="ava acc">${esc((CU.name||"?")[0].toUpperCase())}</div>
+   <div class="grow"><div class="t15" style="font-size:16px">${esc(CU.name)}</div>
+    <div class="t12">${esc(CU.mail)}</div></div>
+   <span class="pill on">${role}</span>
+  </div>
+  ${CU.role==="coach"?`<div class="code-box" style="margin-top:0;margin-bottom:12px">
+    <div><div class="t12" style="margin:0 0 3px;letter-spacing:.8px">TON CODE COACH</div>
+     <div class="code-val">${esc(CU.code)}</div></div>
+    <button class="btn sm ghost" onclick="copyCode()">Copier</button></div>`:""}
+  ${coach?`<div class="spread" style="padding:10px 0;border-top:1px solid var(--line)">
+    <span class="t12" style="margin:0">Mon coach</span><span class="t15">${esc(coach.name)}</span></div>`:""}
+  <div class="row" style="gap:8px;margin-top:6px">
+   <button class="btn ghost sm" style="flex:1" onclick="toggleTheme()">${S.theme==="dark"?"☀️ Thème clair":"🌙 Thème sombre"}</button>
+   <button class="btn sm danger" style="flex:1" onclick="doLogout()">Se déconnecter</button>
+  </div>
+  <div class="t12" style="margin-top:12px;text-align:center;opacity:.8">
+   Version test · les comptes et messages sont stockés sur cet appareil uniquement</div>`;
+}
 function renderAvatar(){
+ renderAccount();
  $("av-points").textContent="🪙 "+S.points+" pts";
  $("av-stage").innerHTML=avatarSVG(140);
  $("shop-grid").innerHTML=SHOP.map(it=>{
@@ -1728,40 +1962,13 @@ function shopTap(id){
 }
 /* ============ POINTS, SOCIAL, NOTIFICATIONS, CÉLÉBRATIONS ============ */
 function addPoints(n,label){S.points+=n;save();toast("🪙 +"+n+" pts · "+label);}
-function updateBadge(){const b=$("notif-badge");if(!b)return;const u=S.social.notifs.length-(S.social.seen||0);b.textContent=u;b.classList.toggle("hide",u<=0);}
+function pushNotif(txt){S.notifs.unshift({t:Date.now(),txt});if(S.notifs.length>60)S.notifs.length=60;save();updateBadge();}
+function updateBadge(){const b=$("notif-badge");if(!b)return;const u=Math.max(0,S.notifs.length-(S.notifSeen||0));b.textContent=u;b.classList.toggle("hide",u<=0);}
 function timeAgo(t){const m=Math.max(1,Math.round((Date.now()-t)/60000));if(m<60)return "il y a "+m+" min";const h=Math.round(m/60);if(h<24)return "il y a "+h+" h";return "il y a "+Math.round(h/24)+" j";}
 function renderNotifs(){
- S.social.seen=S.social.notifs.length;save();updateBadge();
- $("notif-list").innerHTML=S.social.notifs.map(n=>`<div class="card" style="padding:13px"><div style="font-size:14px">${n.txt}</div><div class="t12" style="margin-top:3px">${timeAgo(n.t)}</div></div>`).join("")
- ||`<div class="sub">Rien pour l'instant. Partage une séance pour faire vivre ton réseau !</div>`;
-}
-function renderSocial(){
- $("soc-following").textContent=S.social.following.length+" abonnements";
- $("soc-feed").innerHTML=S.social.posts.map((p,i)=>`<div class="post">
-  <div class="row" style="margin-bottom:8px"><div class="coach-av" style="width:34px;height:34px;font-size:16px;background:var(--card2)">${p.me?avatarSVG(28):p.e}</div>
-  <div class="grow"><div style="font-size:13.5px;font-weight:700">${p.me?"Toi":"@"+esc(p.who)} ${!p.me&&S.social.following.includes(p.who)?'<span class="tag blue">suivi</span>':""}</div><div class="t12" style="margin:0">${timeAgo(p.time)}</div></div></div>
-  <div style="font-size:14px;line-height:1.5;margin-bottom:7px">${esc(p.txt)}</div>
-  ${p.stats?`<span class="tag green">${esc(p.stats)}</span>`:""}
-  <div style="margin-top:9px;border-top:1px solid var(--line)"><button class="like-btn ${p.liked?"on":""}" onclick="toggleLike(${i})">${p.liked?"❤️":"🤍"} ${p.likes}</button></div>
- </div>`).join("");
-}
-function toggleLike(i){const p=S.social.posts[i];p.liked=!p.liked;p.likes+=p.liked?1:-1;save();renderSocial();}
-function followUser(){
- const v=($("soc-input").value||"").trim().replace(/^@/,"");
- if(!v)return;
- if(S.social.following.includes(v)){toast("Tu suis déjà @"+v);return;}
- S.social.following.push(v);
- S.social.notifs.unshift({t:Date.now(),txt:"✅ Tu suis maintenant @"+v});
- $("soc-input").value="";save();renderSocial();updateBadge();
- toast("👥 Tu suis maintenant @"+v);
-}
-function shareLastWorkout(){
- const h=S.history[S.history.length-1];if(!h){toast("Termine d'abord une séance 😄");return;}
- S.social.posts.unshift({id:Date.now(),who:S.name,me:true,e:"💪",time:Date.now(),type:"seance",
-  txt:"Séance "+h.name+" terminée ! 💪",stats:(h.vol>=1000?(h.vol/1000).toFixed(1)+" t":Math.round(h.vol)+" kg")+" soulevés · "+h.dur+" min",likes:0,liked:false});
- save();
- setTimeout(()=>{const p=S.social.posts.find(x=>x.me);if(p){p.likes+=2+Math.floor(Math.random()*4);S.social.notifs.unshift({t:Date.now(),txt:"❤️ sarah_fit et "+(p.likes-1)+" autres ont aimé ta séance"});save();updateBadge();}},2500);
- go("social");toast("📣 Séance partagée avec la communauté !");
+ S.notifSeen=S.notifs.length;save();updateBadge();
+ $("notif-list").innerHTML=S.notifs.map(n=>`<div class="card" style="padding:13px"><div style="font-size:14px">${n.txt}</div><div class="t12" style="margin-top:3px">${timeAgo(n.t)}</div></div>`).join("")
+ ||`<div class="empty"><span class="em">🔔</span>Aucune notification pour l'instant.</div>`;
 }
 function toggleTheme(){
  S.theme=S.theme==="dark"?"light":"dark";save();applyTheme();
@@ -1781,11 +1988,523 @@ function checkMealsComplete(){
  if(filled>=4&&S.mealDoneDay!==today){S.mealDoneDay=today;save();addPoints(20,"journée alimentaire complète 🍽");setTimeout(()=>toast("👏 Tous tes repas sont loggés aujourd'hui, c'est comme ça qu'on progresse !"),1200);}
 }
 
+
+/* ============================================================
+   AUTHENTIFICATION
+   ============================================================ */
+let authRole="client";
+function authTab(t){
+ $("auth-tab-in").classList.toggle("on",t==="in");
+ $("auth-tab-up").classList.toggle("on",t==="up");
+ $("auth-in").style.display = t==="in"?"block":"none";
+ $("auth-up").style.display = t==="up"?"block":"none";
+}
+function pickRole(r){
+ authRole=r;
+ $("rc-client").classList.toggle("on",r==="client");
+ $("rc-coach").classList.toggle("on",r==="coach");
+ $("up-code-wrap").style.display = r==="client"?"block":"none";
+}
+function showAuth(){
+ document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));
+ $("nav").classList.remove("show");
+ $("scr-auth").classList.add("active");
+ authTab(usersAll().length?"in":"up");
+}
+function doSignup(){
+ const name=($("up-name").value||"").trim();
+ const mail=($("up-mail").value||"").trim().toLowerCase();
+ const pass=($("up-pass").value||"").trim();
+ const code=($("up-code").value||"").trim().toUpperCase();
+ if(!name)return toast("Dis-moi ton prénom 🙂");
+ if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail))return toast("Cet email n'a pas l'air valide");
+ if(pass.length<6)return toast("Mot de passe : 6 caractères minimum");
+ if(userByMail(mail))return toast("Un compte existe déjà avec cet email");
+ let coachUid=null,status="solo";
+ if(authRole==="client" && code){
+  const c=userByCode(code);
+  if(!c)return toast("Code coach introuvable — vérifie avec ton coach");
+  coachUid=c.uid; status="pending";
+ }
+ const u={uid:"u"+Date.now().toString(36)+Math.random().toString(36).slice(2,6),
+  name,mail,pass:hash(pass),role:authRole,
+  code:authRole==="coach"?newCode():null,
+  coachUid,status:authRole==="coach"?"active":status,created:Date.now()};
+ const a=usersAll(); a.push(u); usersSave(a);
+ localStorage.setItem("forma_session",u.uid);
+ CU=u; loadState();
+ S.name=name; if(authRole==="coach")S.onboarded=true;
+ save();
+ ["up-name","up-mail","up-pass","up-code"].forEach(id=>{if($(id))$(id).value="";});
+ if(coachUid){
+  const c=userById(coachUid);
+  convSend(u.uid,coachUid,name+" souhaite rejoindre ton suivi. Demande d'accès en attente de ta validation.","sys");
+  toast("📨 Demande envoyée à "+c.name);
+ }
+ boot();
+}
+function doLogin(){
+ const mail=($("in-mail").value||"").trim().toLowerCase();
+ const pass=($("in-pass").value||"").trim();
+ const u=userByMail(mail);
+ if(!u||u.pass!==hash(pass))return toast("Email ou mot de passe incorrect");
+ localStorage.setItem("forma_session",u.uid);
+ CU=u; loadState();
+ $("in-mail").value=""; $("in-pass").value="";
+ boot();
+}
+function doLogout(){
+ stopSteps();
+ localStorage.removeItem("forma_session");
+ CU=null; coachOpen=null;
+ loadState();
+ showAuth();
+ toast("👋 À bientôt !");
+}
+
+/* ===== Écran verrouillé (accès géré par le coach) ===== */
+function showLocked(){
+ document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));
+ $("nav").classList.remove("show");
+ $("scr-locked").classList.add("active");
+ const coach=CU.coachUid?userById(CU.coachUid):null;
+ if(CU.status==="suspended"){
+  $("lock-emoji").textContent="🔒";
+  $("lock-title").textContent="Accès suspendu";
+  $("lock-text").innerHTML="Ton accès a été mis en pause par "+esc(coach?coach.name:"ton coach")+
+   ". Contacte-le directement pour le réactiver.";
+  $("lock-actions").innerHTML="";
+ }else{
+  $("lock-emoji").textContent="⏳";
+  $("lock-title").textContent="Demande envoyée";
+  $("lock-text").innerHTML="Ta demande a bien été transmise à <b>"+esc(coach?coach.name:"ton coach")+
+   "</b>. Dès qu'il la valide, tu auras accès à ton programme, ton suivi et la messagerie.";
+  $("lock-actions").innerHTML=`<button class="btn ghost" onclick="goSolo()">Continuer sans coach pour l'instant</button>`;
+ }
+}
+function goSolo(){
+ userPatch(CU.uid,{status:"solo",coachUid:null});
+ toast("Tu peux utiliser l'app librement 💪");
+ boot();
+}
+
+/* ============================================================
+   MESSAGERIE COACH ↔ CLIENT
+   ============================================================ */
+function convKey(a,b){return "forma_msgs_"+[a,b].sort().join("~");}
+function convGet(a,b){try{return JSON.parse(localStorage.getItem(convKey(a,b))||"[]");}catch(e){return [];}}
+function convSet(a,b,arr){try{localStorage.setItem(convKey(a,b),JSON.stringify(arr));}catch(e){}}
+function convSend(from,to,txt,kind){
+ const arr=convGet(from,to);
+ arr.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),from,txt,t:Date.now(),read:false,kind:kind||"txt"});
+ if(arr.length>400)arr.splice(0,arr.length-400);
+ convSet(from,to,arr);
+}
+function convUnread(me,other){return convGet(me,other).filter(m=>m.from!==me&&!m.read).length;}
+function convMarkRead(me,other){
+ const a=convGet(me,other);let ch=false;
+ a.forEach(m=>{if(m.from!==me&&!m.read){m.read=true;ch=true;}});
+ if(ch)convSet(me,other,a);
+}
+function myClients(){
+ if(!CU||CU.role!=="coach")return [];
+ return usersAll().filter(u=>u.role==="client"&&u.coachUid===CU.uid)
+  .sort((a,b)=>(convUnread(CU.uid,b.uid)-convUnread(CU.uid,a.uid))||a.name.localeCompare(b.name));
+}
+function totalUnread(){
+ if(!CU)return 0;
+ if(CU.role==="coach")return myClients().reduce((s,c)=>s+convUnread(CU.uid,c.uid),0);
+ return CU.coachUid?convUnread(CU.uid,CU.coachUid):0;
+}
+function refreshUnread(){
+ const d=$("nav-unread"); if(!d)return;
+ const n=totalUnread();
+ d.textContent=n>9?"9+":n;
+ d.classList.toggle("hide",n<=0);
+}
+function sendProfileToCoach(){
+ if(!CU||CU.role!=="client"||!CU.coachUid)return;
+ const t=targets();
+ convSend(CU.uid,CU.coachUid,
+  "📋 Profil complété\n"+
+  "Objectifs : "+goalLabel()+"\n"+
+  "Niveau "+S.level+" · "+S.freq+" séances/sem de "+S.dur+" min · "+S.equip+"\n"+
+  S.weight+" kg pour "+S.height+" cm (cible "+S.goalWeight+" kg)\n"+
+  "Besoins estimés : "+t.kcal+" kcal · P "+t.p+" / G "+t.c+" / L "+t.f+" g"+
+  (S.injuries.length?("\nZones sensibles : "+S.injuries.join(", ")):"")+
+  (S.exclusions.length?("\nAlimentation : "+S.exclusions.join(", ")):""),"sys");
+}
+function sendWorkoutToCoach(){
+ if(!CU||CU.role!=="client"||!CU.coachUid||CU.status!=="active")
+  return toast("Connecte-toi à un coach pour lui envoyer tes séances");
+ const h=S.history[S.history.length-1];
+ if(!h)return toast("Termine d'abord une séance 😄");
+ convSend(CU.uid,CU.coachUid,
+  "✅ Séance terminée : "+h.name+"\n"+
+  (h.vol>=1000?(h.vol/1000).toFixed(1)+" t":Math.round(h.vol)+" kg")+" soulevés · "+h.sets+" séries · "+h.dur+" min","sys");
+ toast("📨 Résumé envoyé à ton coach");
+ refreshUnread();
+}
+
+/* ===== Rendu de l'écran Messages ===== */
+let coachOpen=null;   // uid de la conversation ouverte (côté coach)
+function renderCoach(){
+ if(!CU){showAuth();return;}
+ if(CU.role==="coach"){ coachOpen ? renderConv(coachOpen) : renderCoachDash(); }
+ else { CU.coachUid ? renderConv(CU.coachUid) : renderNoCoach(); }
+ refreshUnread();
+}
+
+function renderCoachDash(){
+ const clients=myClients();
+ const pend=clients.filter(c=>c.status==="pending");
+ const act=clients.filter(c=>c.status!=="pending");
+ $("co-head").innerHTML=`
+  <div class="spread">
+   <div><h1 style="font-size:23px">Mes clients</h1>
+    <div class="sub" style="margin-top:2px">${act.length} suivi${act.length>1?"s":""} actif${act.length>1?"s":""}${pend.length?" · "+pend.length+" en attente":""}</div></div>
+   <button class="icon-btn" onclick="showWeeklyReport()">📊</button>
+  </div>
+  <div class="code-box">
+   <div>
+    <div class="t12" style="margin:0 0 3px;letter-spacing:.8px">CODE À DONNER À TES CLIENTS</div>
+    <div class="code-val">${esc(CU.code)}</div>
+   </div>
+   <button class="btn sm ghost" onclick="copyCode()">Copier</button>
+  </div>`;
+
+ let h="";
+ if(pend.length){
+  h+=`<div class="section-t">Demandes d'accès</div>`;
+  h+=pend.map(c=>`<div class="cli-row unread" style="cursor:default">
+    <div class="ava">${esc(c.name[0].toUpperCase())}</div>
+    <div class="grow"><div class="t15">${esc(c.name)}</div><div class="t12">${esc(c.mail)}</div></div>
+    <div style="display:flex;gap:6px">
+     <button class="btn sm ok" onclick="event.stopPropagation();setAccess('${c.uid}','active')">Accepter</button>
+     <button class="btn sm danger" onclick="event.stopPropagation();setAccess('${c.uid}','refused')">✕</button>
+    </div></div>`).join("");
+ }
+
+ h+=`<div class="section-t">Suivis</div>`;
+ if(!act.length){
+  h+=`<div class="empty"><span class="em">👥</span>
+    Aucun client pour l'instant.<br>Transmets ton code <b style="color:var(--accent)">${esc(CU.code)}</b>
+    pour qu'ils te rejoignent depuis l'inscription.</div>`;
+ }else{
+  h+=act.map(c=>{
+   const un=convUnread(CU.uid,c.uid);
+   const msgs=convGet(CU.uid,c.uid);
+   const last=msgs[msgs.length-1];
+   const st=stateOf(c.uid);
+   const stp=(st.steps&&st.steps[today])?st.steps[today].n:0;
+   return `<div class="cli-row ${un?"unread":""}" onclick="openConv('${c.uid}')">
+     <div class="ava ${un?"acc":""}">${esc(c.name[0].toUpperCase())}</div>
+     <div class="grow">
+      <div class="spread"><div class="t15">${esc(c.name)}</div>
+       <span class="pill ${c.status==="active"?"on":"off"}">${c.status==="active"?"Actif":"Suspendu"}</span></div>
+      <div class="t12" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px">
+       ${last?(last.from===CU.uid?"Toi : ":"")+esc(last.txt.split("\n")[0]):"Aucun message"}</div>
+      <div class="t12" style="margin-top:4px;opacity:.85">👟 ${stp.toLocaleString("fr-FR")} pas · 🏋️ ${st.history.length} séances</div>
+     </div>
+     ${un?`<span class="nbadge" style="position:static">${un}</span>`:""}
+    </div>`;
+  }).join("");
+ }
+ $("co-body").innerHTML=h;
+ $("co-foot").innerHTML="";
+}
+
+function renderNoCoach(){
+ $("co-head").innerHTML=`<h1 style="font-size:23px">Mon coach</h1>
+  <div class="sub" style="margin-top:2px">Rejoins ton coach avec le code qu'il t'a transmis</div>`;
+ $("co-body").innerHTML=`
+  <div class="empty" style="padding-top:26px"><span class="em">🎯</span>
+   Tu n'es rattaché à aucun coach.<br>Saisis son code pour lui envoyer une demande.</div>
+  <label>Code coach</label>
+  <input id="join-code" placeholder="FRM-XXXX" style="text-transform:uppercase"
+   onkeydown="if(event.key==='Enter')joinCoach()">
+  <button class="btn" style="margin-top:14px" onclick="joinCoach()">Envoyer ma demande</button>`;
+ $("co-foot").innerHTML="";
+}
+function joinCoach(){
+ const c=userByCode($("join-code").value);
+ if(!c)return toast("Code introuvable — vérifie avec ton coach");
+ userPatch(CU.uid,{coachUid:c.uid,status:"pending"});
+ convSend(CU.uid,c.uid,CU.name+" souhaite rejoindre ton suivi. Demande d'accès en attente de ta validation.","sys");
+ sendProfileToCoach();
+ toast("📨 Demande envoyée à "+c.name);
+ boot();
+}
+
+function openConv(uid){coachOpen=uid;renderCoach();}
+function backToDash(){coachOpen=null;renderCoach();}
+
+function renderConv(otherUid){
+ const other=userById(otherUid);
+ if(!other){ if(CU.role==="client")userPatch(CU.uid,{coachUid:null,status:"solo"}); return renderCoach(); }
+ convMarkRead(CU.uid,otherUid);
+ const isCoach=CU.role==="coach";
+
+ $("co-head").innerHTML=`<div class="row">
+   ${isCoach?`<button class="icon-btn" onclick="backToDash()">←</button>`:""}
+   <div class="ava acc">${esc(other.name[0].toUpperCase())}</div>
+   <div class="grow">
+    <h2 style="font-size:17px">${esc(other.name)}</h2>
+    <div class="t12" style="margin-top:1px">${isCoach?esc(other.mail):"Ton coach"}</div>
+   </div>
+   ${isCoach?`<button class="icon-btn" onclick="clientSheet('${other.uid}')">📈</button>`:""}
+  </div>
+  ${isCoach?`<div class="row" style="gap:7px;margin-top:12px">
+    <button class="btn sm ghost" style="flex:1" onclick="clientSheet('${other.uid}')">Fiche client</button>
+    <button class="btn sm ${other.status==="active"?"danger":"ok"}" style="flex:1"
+     onclick="setAccess('${other.uid}','${other.status==="active"?"suspended":"active"}')">
+     ${other.status==="active"?"Suspendre l'accès":"Réactiver l'accès"}</button>
+   </div>`:""}`;
+
+ const msgs=convGet(CU.uid,otherUid);
+ let h=`<div class="chat-scroll">`;
+ if(!msgs.length){
+  h+=`<div class="empty"><span class="em">💬</span>${isCoach?"Écris le premier message à "+esc(other.name)+".":"Pose ta question à ton coach, il te répondra ici."}</div>`;
+ }else{
+  let lastDay="";
+  msgs.forEach(m=>{
+   const d=new Date(m.t), day=d.toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"});
+   if(day!==lastDay){lastDay=day;h+=`<div class="msg-day">${day}</div>`;}
+   const mine=m.from===CU.uid;
+   h+=`<div class="msg ${mine?"me":"them"}">${esc(m.txt)}<div class="msg-t">${d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}${mine&&m.read?" ✓✓":""}</div></div>`;
+  });
+ }
+ h+=`</div>`;
+ $("co-body").innerHTML=h;
+ $("co-foot").innerHTML=`<div class="co-input">
+   <input id="co-msg" placeholder="Écris ton message…" onkeydown="if(event.key==='Enter')sendMsg('${otherUid}')">
+   <button class="btn" onclick="sendMsg('${otherUid}')">➤</button></div>`;
+ const b=$("co-body"); b.scrollTop=b.scrollHeight;
+ refreshUnread();
+}
+function sendMsg(otherUid){
+ const inp=$("co-msg"), txt=(inp.value||"").trim();
+ if(!txt)return;
+ convSend(CU.uid,otherUid,txt);
+ inp.value="";
+ renderConv(otherUid);
+ const b=$("co-body"); b.scrollTop=b.scrollHeight;
+ $("co-msg").focus();
+}
+
+function setAccess(uid,mode){
+ const u=userById(uid); if(!u)return;
+ if(mode==="refused"){
+  userPatch(uid,{coachUid:null,status:"solo"});
+  convSend(CU.uid,uid,"Ta demande n'a pas été retenue pour le moment.","sys");
+  toast("Demande refusée");
+ }else{
+  userPatch(uid,{status:mode});
+  convMarkRead(CU.uid,uid);
+  convSend(CU.uid,uid,mode==="active"?"✅ Ton accès est validé, bienvenue ! On peut commencer.":"⏸️ Ton accès a été mis en pause.","sys");
+  toast(mode==="active"?"✅ "+u.name+" a désormais accès":"⏸️ Accès suspendu");
+ }
+ renderCoach();
+}
+function copyCode(){
+ const t=CU.code;
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>toast("📋 Code copié : "+t)).catch(()=>toast("Ton code : "+t));
+ else toast("Ton code : "+t);
+}
+
+/* ===== Fiche client (le coach lit les données du client) ===== */
+function clientSheet(uid){
+ const u=userById(uid), st=stateOf(uid);
+ const stp=(st.steps&&st.steps[today])?st.steps[today]:{n:0};
+ const week=st.history.filter(x=>Date.now()-x.date<7*864e5);
+ const vol=week.reduce((s,x)=>s+x.vol,0);
+ const kcal=(st.food?[0,1,2,3].reduce((s,m)=>s+(st.food[m]||[]).reduce((a,f)=>a+f.k,0),0):0);
+ const line=(l,v)=>`<div class="spread" style="padding:9px 0;border-bottom:1px solid var(--line)"><span class="t12" style="margin:0">${l}</span><span class="t15">${v}</span></div>`;
+ openSheet(`
+  <div class="row" style="margin-bottom:14px">
+   <div class="ava acc">${esc(u.name[0].toUpperCase())}</div>
+   <div class="grow"><h2>${esc(u.name)}</h2><div class="t12">${esc(u.mail)}</div></div>
+   <span class="pill ${u.status==="active"?"on":"off"}">${u.status==="active"?"Actif":"Suspendu"}</span>
+  </div>
+  <div class="stat3" style="margin-bottom:12px">
+   <div><div class="big" style="font-size:20px;color:var(--accent)">${week.length}</div><div class="t12">SÉANCES / 7J</div></div>
+   <div><div class="big" style="font-size:20px;color:var(--blue)">${stp.n.toLocaleString("fr-FR")}</div><div class="t12">PAS AUJOURD'HUI</div></div>
+   <div><div class="big" style="font-size:20px;color:var(--amber)">${st.streak||0}</div><div class="t12">SÉRIE</div></div>
+  </div>
+  ${line("Objectifs",esc((st.goals||[]).map(g=>GOALS[g]||g).join(" + ")||"—"))}
+  ${line("Niveau / rythme",esc(st.level)+" · "+st.freq+"×"+st.dur+" min")}
+  ${line("Équipement",esc(st.equip))}
+  ${line("Poids",st.weight+" kg → "+st.goalWeight+" kg")}
+  ${line("Volume 7 jours",vol>=1000?(vol/1000).toFixed(1)+" t":Math.round(vol)+" kg")}
+  ${line("Calories du jour",kcal+" kcal")}
+  ${line("Zones sensibles",esc((st.injuries||[]).join(", ")||"aucune"))}
+  ${line("Alimentation",esc((st.exclusions||[]).join(", ")||"aucune restriction"))}
+  ${line("Programme",esc((st.program||[]).map(p=>p.name).join(" · ")||"—"))}
+  <button class="btn" style="margin-top:16px" onclick="closeSheet()">Fermer</button>`);
+}
+
+/* ============================================================
+   PODOMÈTRE (accéléromètre, sans GPS)
+   ============================================================ */
+const STEPX={on:false,lastPeak:0,buf:[],avg:9.8,handler:null};
+function stepsToday(){
+ if(!S.steps[today])S.steps[today]={n:0,min:0,lastMin:0};
+ return S.steps[today];
+}
+function stepAdd(n){
+ const d=stepsToday();
+ d.n+=n;
+ const m=Math.floor(Date.now()/60000);
+ if(d.lastMin!==m){d.lastMin=m;d.min++;}
+ // nettoyage : on ne garde que 14 jours
+ const keys=Object.keys(S.steps);
+ if(keys.length>14)keys.slice(0,keys.length-14).forEach(k=>delete S.steps[k]);
+ save();
+ if(d.n>=S.stepGoal && S.stepDoneDay!==today){
+  S.stepDoneDay=today;save();confetti();addPoints(20,"objectif pas atteint 👟");
+  setTimeout(()=>toast("🎉 "+S.stepGoal.toLocaleString("fr-FR")+" pas atteints, superbe !"),900);
+ }
+ renderSteps();
+}
+function stepMetrics(){
+ const d=stepsToday();
+ const strideM=(S.height||175)*0.415/100;          // longueur de foulée estimée
+ const km=d.n*strideM/1000;
+ const kcal=Math.round(d.n*0.00045*(S.weight||75));
+ return {n:d.n,km,kcal,min:d.min,pct:Math.min(d.n/S.stepGoal*100,100)};
+}
+function renderSteps(){
+ if(!$("st-count"))return;
+ const m=stepMetrics(), done=m.n>=S.stepGoal;
+ $("st-count").textContent=m.n.toLocaleString("fr-FR");
+ $("st-goal").textContent="/ "+S.stepGoal.toLocaleString("fr-FR");
+ $("st-bar").style.width=m.pct+"%";
+ $("st-bar").style.background=done?"linear-gradient(90deg,var(--ok),#6EE7B7)":"linear-gradient(90deg,var(--blue),#93C5FD)";
+ $("st-emoji").textContent=done?"🏅":(STEPX.on?"🚶":"👟");
+ $("st-km").textContent=m.km.toFixed(2).replace(".",",");
+ $("st-kcal").textContent=m.kcal;
+ $("st-min").textContent=m.min;
+ const a=$("st-actions");
+ if(!a)return;
+ if(STEPX.on){
+  a.innerHTML=`<div class="t12" style="text-align:center">● Comptage automatique actif · garde le téléphone sur toi</div>`;
+ }else if(window.DeviceMotionEvent){
+  a.innerHTML=`<button class="btn ghost sm" style="width:100%" onclick="startSteps()">Activer le comptage automatique</button>`;
+ }else{
+  a.innerHTML=`<div class="row" style="gap:8px">
+    <button class="btn ghost sm" style="flex:1" onclick="stepAdd(500)">+500 pas (test)</button>
+    <button class="btn ghost sm" style="flex:1" onclick="stepAdd(2000)">+2000 pas</button></div>
+   <div class="t12" style="text-align:center;margin-top:8px">Le capteur de mouvement n'est pas disponible sur cet appareil</div>`;
+ }
+}
+function startSteps(){
+ if(STEPX.on)return;
+ if(typeof DeviceMotionEvent!=="undefined" && typeof DeviceMotionEvent.requestPermission==="function"){
+  DeviceMotionEvent.requestPermission().then(p=>{
+   if(p==="granted")enableSteps();
+   else toast("Autorisation refusée — le comptage reste manuel");
+  }).catch(()=>toast("Impossible d'activer le capteur ici"));
+ }else if(window.DeviceMotionEvent){ enableSteps(); }
+ else toast("Capteur de mouvement indisponible sur cet appareil");
+}
+function enableSteps(){
+ STEPX.on=true;
+ STEPX.handler=function(e){
+  const a=e.accelerationIncludingGravity||e.acceleration; if(!a)return;
+  const mag=Math.sqrt((a.x||0)**2+(a.y||0)**2+(a.z||0)**2);
+  STEPX.avg=STEPX.avg*0.9+mag*0.1;                 // filtre passe-bas
+  const dyn=mag-STEPX.avg;
+  const now=Date.now();
+  if(dyn>1.7 && now-STEPX.lastPeak>320){ STEPX.lastPeak=now; stepAdd(1); }
+ };
+ window.addEventListener("devicemotion",STEPX.handler);
+ renderSteps();
+ toast("👟 Comptage des pas activé");
+}
+function stopSteps(){
+ if(STEPX.handler)window.removeEventListener("devicemotion",STEPX.handler);
+ STEPX.on=false; STEPX.handler=null;
+}
+
+/* ============================================================
+   BANDEAU D'ACCUEIL selon le rôle
+   ============================================================ */
+function renderHomePanel(){
+ const p=$("home-coach-panel"); if(!p)return;
+ if(!CU){p.innerHTML="";return;}
+ if(CU.role==="coach"){
+  const cl=myClients(), pend=cl.filter(c=>c.status==="pending").length, un=totalUnread();
+  p.innerHTML=`<div class="card hero tap" onclick="go('coach')">
+   <div class="spread" style="margin-bottom:12px">
+    <div><div class="tag green" style="margin-bottom:8px">ESPACE COACH</div>
+     <h2>${cl.length} client${cl.length>1?"s":""}</h2></div>
+    <span style="font-size:28px">🎯</span></div>
+   <div class="stat3">
+    <div><div class="big" style="font-size:20px;color:var(--accent)">${cl.filter(c=>c.status==="active").length}</div><div class="t12">ACTIFS</div></div>
+    <div><div class="big" style="font-size:20px;color:var(--amber)">${pend}</div><div class="t12">EN ATTENTE</div></div>
+    <div><div class="big" style="font-size:20px;color:var(--blue)">${un}</div><div class="t12">NON LUS</div></div>
+   </div></div>`;
+ }else if(CU.status==="solo"){
+  p.innerHTML=`<div class="card tap" onclick="go('coach')" style="border-color:var(--accent-line)">
+   <div class="row"><span style="font-size:24px">🎯</span>
+    <div class="grow"><div class="t15">Rejoindre mon coach</div>
+     <div class="t12">Saisis le code qu'il t'a transmis pour être suivi</div></div>
+    <span style="color:var(--accent);font-weight:800">→</span></div></div>`;
+ }else{p.innerHTML="";}
+}
+
+/* ============================================================
+   DÉMARRAGE
+   ============================================================ */
+function boot(){
+ CU = uidNow()?userById(uidNow()):null;
+ if(!CU){ loadState(); applyTheme(); showAuth(); return; }
+ loadState();
+ applyTheme();
+ if(CU.role==="client" && (CU.status==="pending"||CU.status==="suspended")){ showLocked(); return; }
+ document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));
+ if(CU.role==="client" && !S.onboarded){
+  $("nav").classList.remove("show");
+  $("scr-onboarding").classList.add("active");
+  obStep=0; renderOb(); return;
+ }
+ if(!S.program.length)genProgram();
+ $("nav").classList.add("show");
+ go("home");
+ refreshUnread();
+ lastUnread=totalUnread();
+ if(!msgPoll)msgPoll=setInterval(pollMessages,4000);
+}
+let msgPoll=null, lastUnread=0;
+function pollMessages(){
+ if(!CU)return;
+ const fresh=userById(CU.uid);
+ if(!fresh){doLogout();return;}
+ const wasStatus=CU.status; CU=fresh;
+ if(CU.role==="client" && CU.status!==wasStatus){
+  if(CU.status==="suspended"){showLocked();return;}
+  if(wasStatus==="pending" && CU.status==="active"){toast("✅ Ton coach a validé ton accès !");boot();return;}
+ }
+ const n=totalUnread();
+ if(n>lastUnread && !$("scr-coach").classList.contains("active")){
+  toast("💬 Nouveau message"+(CU.role==="client"?" de ton coach":""));
+ }
+ lastUnread=n;
+ refreshUnread();
+ if($("scr-coach").classList.contains("active"))renderCoach();
+ if($("scr-home").classList.contains("active")){renderHomeMsg();renderHomePanel();}
+}
+
 /* ================= INIT ================= */
 (function init(){
- applyTheme();
- if(S.onboarded){$("nav").classList.add("show");go("home");}
- else{$("scr-onboarding").classList.add("active");renderOb();}
+ boot();
+ window.addEventListener("storage",()=>{
+  if(!CU)return;
+  const fresh=userById(CU.uid);
+  if(fresh)CU=fresh;
+  refreshUnread();
+  if($("scr-coach").classList.contains("active"))renderCoach();
+ });
 })();
 </script>
 </div>
