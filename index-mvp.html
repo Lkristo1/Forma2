@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0A0B0D">
+<title>FORMA — Ton coach. Ton carnet. Ton journal.</title>
+<style>
+:root{
+  --bg:#0F1B2D; --card:#16283F; --card2:#1E3450; --line:#26405E;
+  --text:#EFF4FA; --muted:#8FA3BC; --accent:#F08A45; --accent-dim:rgba(240,138,69,.14);
+  --btn-txt:#24140A; --ok:#3CB371; --danger:#E05252; --amber:#FFB020;
+  --r:16px; --nav-h:64px;
+}
+#phone[data-theme="light"]{
+  --bg:#F7F9FB; --card:#FFFFFF; --card2:#EDF1F6; --line:#DFE6EE;
+  --text:#1A2433; --muted:#64748B; --accent:#D96A24; --accent-dim:rgba(217,106,36,.12);
+  --btn-txt:#FFFFFF;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:#000;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Inter',sans-serif;color:var(--text);display:flex;justify-content:center}
+#phone{width:100%;max-width:430px;height:100dvh;background:var(--bg);position:relative;overflow:hidden;display:flex;flex-direction:column}
+@media(min-width:500px){#phone{height:min(880px,96dvh);margin:auto;border-radius:36px;border:1px solid #23262e;box-shadow:0 30px 80px rgba(0,0,0,.6)}}
+.screen{position:absolute;inset:0;bottom:var(--nav-h);overflow-y:auto;overflow-x:hidden;display:none;padding:20px 18px 30px;scrollbar-width:none}
+.screen::-webkit-scrollbar{display:none}
+.screen.active{display:block;animation:fadeIn .22s ease}
+.screen.full{bottom:0}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h1{font-size:24px;font-weight:800;letter-spacing:-.5px}
+h2{font-size:18px;font-weight:700;letter-spacing:-.3px}
+.sub{color:var(--muted);font-size:13.5px;line-height:1.5}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:14px}
+.row{display:flex;align-items:center;gap:12px}
+.spread{display:flex;align-items:center;justify-content:space-between}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px;border:none;border-radius:14px;background:var(--accent);color:var(--btn-txt);font-size:15.5px;font-weight:700;cursor:pointer;transition:transform .1s}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:var(--card2);color:var(--text);border:1px solid var(--line)}
+.btn.danger{background:rgba(255,92,92,.15);color:var(--danger)}
+.btn.sm{width:auto;padding:9px 14px;font-size:13px;border-radius:10px}
+.tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;background:var(--card2);color:var(--muted);white-space:nowrap}
+.tag.green{background:var(--accent-dim);color:var(--accent)}
+input,select,textarea{width:100%;padding:13px 14px;border-radius:12px;background:var(--card2);border:1.5px solid var(--line);color:var(--text);font-size:15px;outline:none;font-family:inherit;margin-bottom:12px}
+input:focus{border-color:var(--accent)}
+label{font-size:12.5px;font-weight:600;color:var(--muted);display:block;margin:12px 0 6px}
+.bar{height:8px;border-radius:6px;background:var(--card2);overflow:hidden}
+.bar>i{display:block;height:100%;border-radius:6px;background:var(--accent);transition:width .5s ease}
+#nav{position:absolute;left:0;right:0;bottom:0;height:var(--nav-h);background:rgba(14,16,19,.92);backdrop-filter:blur(14px);border-top:1px solid var(--line);display:none;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
+#nav.show{display:flex}
+.nav-it{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--muted);font-size:10px;font-weight:600;cursor:pointer;border:none;background:none}
+.nav-it.on{color:var(--accent)}
+.msg{max-width:82%;padding:11px 14px;border-radius:16px;font-size:14.5px;line-height:1.55;margin-bottom:8px}
+.msg.user{align-self:flex-end;background:var(--accent);color:var(--btn-txt);border-radius:16px 16px 4px 16px;font-weight:500}
+.msg.coach{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-radius:4px 16px 16px 16px}
+.msg-time{font-size:11px;color:var(--muted);margin-top:4px;opacity:.7}
+.icon-btn{width:38px;height:38px;border-radius:12px;background:var(--card2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;font-size:16px;color:var(--text);font-weight:600}
+.tabs{display:flex;gap:8px;margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.tab-btn{flex:1;padding:8px;border:none;background:none;color:var(--muted);font-weight:600;cursor:pointer;font-size:13px;border-bottom:2px solid transparent}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+.list-it{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.list-it:last-child{border-bottom:none}
+.avatar{width:42px;height:42px;border-radius:12px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;font-weight:800}
+.grow{flex:1;min-width:0}
+.t15{font-size:14.5px;font-weight:600}
+.t12{font-size:12px;color:var(--muted);margin-top:2px}
+.stat3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center}
+.big{font-size:26px;font-weight:800;letter-spacing:-.5px}
+.login-container{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:40px 20px;text-align:center}
+.login-title{font-weight:800;font-size:32px;margin-bottom:8px}
+.login-subtitle{color:var(--muted);margin-bottom:30px}
+.role-selector{display:flex;gap:10px;margin-bottom:20px}
+.role-selector label{flex:1;margin:0;padding:12px;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;background:var(--card2);transition:all .2s}
+.role-selector input{display:none}
+.role-selector input:checked + label{border-color:var(--accent);background:var(--accent-dim);color:var(--accent)}
+.nbadge{position:absolute;top:-4px;right:-4px;min-width:17px;height:17px;border-radius:9px;background:var(--danger);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.chat-container{display:flex;flex-direction:column;height:100%;overflow:hidden}
+.chat-header{padding:16px 18px;border-bottom:1px solid var(--line);flex-shrink:0}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:8px}
+.chat-input-area{padding:12px 18px;border-top:1px solid var(--line);display:flex;gap:8px;flex-shrink:0}
+.chat-input-area input{margin:0;flex:1}
+.chat-input-area button{width:48px;padding:0;flex-shrink:0;margin:0}
+</style>
+</head>
+<body>
+<div id="phone">
+
+<!-- LOGIN SCREEN -->
+<div class="screen full active" id="scr-login">
+  <div class="login-container">
+    <div style="font-size:48px;margin-bottom:16px">⚽</div>
+    <div class="login-title">FORMA</div>
+    <div class="login-subtitle">Ton coach. Ton carnet.</div>
+
+    <div class="tabs" style="border:none;padding:0;width:100%;justify-content:center;gap:0;margin-bottom:24px">
+      <button class="tab-btn active" data-tab="signin" onclick="switchTab('signin')" style="border-bottom:2px solid var(--accent)">Login</button>
+      <button class="tab-btn" data-tab="signup" onclick="switchTab('signup')">Sign Up</button>
+    </div>
+
+    <!-- Sign In Tab -->
+    <div id="signin-tab" style="width:100%">
+      <input type="email" id="signin-email" placeholder="Email" style="margin-bottom:12px">
+      <input type="password" id="signin-password" placeholder="Password" style="margin-bottom:20px">
+      <button class="btn" onclick="handleSignIn()">Se connecter</button>
+      <div class="sub" style="margin-top:12px">Pas de compte? <button class="btn ghost sm" onclick="switchTab('signup')" style="width:auto">Sign up</button></div>
+    </div>
+
+    <!-- Sign Up Tab -->
+    <div id="signup-tab" style="width:100%;display:none">
+      <input type="email" id="signup-email" placeholder="Email" style="margin-bottom:12px">
+      <input type="text" id="signup-name" placeholder="Nom complet" style="margin-bottom:12px">
+      <input type="password" id="signup-password" placeholder="Password" style="margin-bottom:16px">
+
+      <label style="margin-bottom:16px;text-align:left">Rôle</label>
+      <div class="role-selector">
+        <input type="radio" id="role-coach" name="role" value="coach" checked>
+        <label for="role-coach" onclick="document.getElementById('role-coach').checked=true">🏆 Coach</label>
+
+        <input type="radio" id="role-client" name="role" value="client">
+        <label for="role-client" onclick="document.getElementById('role-client').checked=true">💪 Client</label>
+      </div>
+
+      <button class="btn" onclick="handleSignUp()">Créer un compte</button>
+      <div class="sub" style="margin-top:12px">Déjà un compte? <button class="btn ghost sm" onclick="switchTab('signin')" style="width:auto">Login</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- HOME SCREEN -->
+<div class="screen" id="scr-home">
+  <div class="spread" style="margin-bottom:16px">
+    <div>
+      <div class="sub" id="home-date"></div>
+      <h1 id="home-greet">Salut</h1>
+    </div>
+    <button class="icon-btn" onclick="logoutUser()">👤</button>
+  </div>
+
+  <!-- Step Tracking Card -->
+  <div class="card">
+    <div class="spread" style="margin-bottom:12px">
+      <h2>Pas du jour</h2>
+      <span class="sub" id="steps-label">0 / 10 000</span>
+    </div>
+    <div class="bar"><i id="steps-bar" style="width:0%"></i></div>
+    <div class="stat3" style="margin-top:14px">
+      <div><div class="big" style="font-size:18px" id="steps-km">0 km</div><div class="t12">DISTANCE</div></div>
+      <div><div class="big" style="font-size:18px" id="steps-cal">0 kcal</div><div class="t12">CALORIES</div></div>
+      <div><div class="big" style="font-size:18px" id="steps-emoji">🚶</div><div class="t12">OBJECTIF</div></div>
+    </div>
+  </div>
+
+  <!-- Quick Access -->
+  <div class="card">
+    <button class="btn sm" onclick="go('coach')" style="width:100%;margin-bottom:8px">💬 Messages</button>
+    <button class="btn sm ghost" onclick="addTestSteps(500)" style="width:100%">+ Test (500 steps)</button>
+  </div>
+
+  <div class="sub" style="text-align:center;padding:20px 0">
+    <strong>MVP Local Version</strong><br>
+    Données en localStorage • Pas Firebase
+  </div>
+</div>
+
+<!-- COACH SCREEN -->
+<div class="screen" id="scr-coach">
+  <div style="display:flex;flex-direction:column;height:100%;overflow:hidden">
+    <!-- Header -->
+    <div style="padding:16px 18px;border-bottom:1px solid var(--line);flex-shrink:0">
+      <button class="btn ghost sm" onclick="go('home')" style="width:auto;margin-bottom:8px">← Retour</button>
+      <h2 style="margin:0;margin-bottom:4px" id="coach-title">Mes clients</h2>
+    </div>
+
+    <!-- Content -->
+    <div style="flex:1;overflow-y:auto;padding:16px 18px" id="coach-content">
+      <!-- Will be populated by JavaScript -->
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav" class="show">
+  <button class="nav-it on" data-s="home" onclick="go('home')">🏠 Home</button>
+  <button class="nav-it" data-s="coach" onclick="renderCoach();go('coach')">💬 Coach</button>
+  <button class="nav-it" data-s="profile" onclick="go('profile')">👤 Profile</button>
+</nav>
+
+<!-- PROFILE SCREEN -->
+<div class="screen" id="scr-profile">
+  <button class="btn ghost sm" onclick="go('home')" style="width:auto;margin-bottom:16px">← Retour</button>
+  <h1>Mon Profil</h1>
+
+  <div class="card">
+    <div class="t12" style="margin:0 0 8px">Nom</div>
+    <div class="t15" id="profile-name">-</div>
+  </div>
+
+  <div class="card">
+    <div class="t12" style="margin:0 0 8px">Email</div>
+    <div class="t15" id="profile-email">-</div>
+  </div>
+
+  <div class="card">
+    <div class="t12" style="margin:0 0 8px">Rôle</div>
+    <div class="t15" id="profile-role">-</div>
+  </div>
+
+  <button class="btn danger" onclick="logoutUser()" style="margin-top:20px">Déconnexion</button>
+</div>
+
+</div>
+
+<script src="app-mvp.js"></script>
+</body>
+</html>
